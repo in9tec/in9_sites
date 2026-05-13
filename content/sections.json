@@ -1,0 +1,10 @@
+{
+  "hero": true,
+  "stats": true,
+  "sobre": true,
+  "conteudos": true,
+  "ferramentas": true,
+  "consultoria": true,
+  "portfolio": true,
+  "contato": true
+}

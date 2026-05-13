@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/c/Users/natha/.claude/projects/C--projetos-nathan-site/design-fetch\")",
+      "Bash(tar -xzf \"/c/Users/natha/.claude/projects/C--projetos-nathan-site/a3c2eec8-23c9-42c5-8e9b-71d1dd7b5a9d/tool-results/webfetch-1778343843226-zjkdfq.bin\" -C \"/c/Users/natha/.claude/projects/C--projetos-nathan-site/design-fetch\")",
+      "Read(//c/Users/natha/.claude/projects/C--projetos-nathan-site/**)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --eslint --no-src-dir --import-alias \"@/*\" --use-npm --turbopack --yes)",
+      "Bash(npm init *)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const p=JSON.parse\\(fs.readFileSync\\('package.json'\\)\\);p.name='nathan-site';fs.writeFileSync\\('package.json',JSON.stringify\\(p,null,2\\)\\);\")",
+      "Bash(npm install *)",
+      "Bash(cp \"/c/Users/natha/.claude/projects/C--projetos-nathan-site/design-fetch/site-nathan-v2/project/assets/nathan-portrait.jpg\" \"/c/projetos/nathan site/public/images/\")",
+      "Bash(cp \"/c/Users/natha/.claude/projects/C--projetos-nathan-site/design-fetch/site-nathan-v2/project/assets/palestra-1.jpg\" \"/c/projetos/nathan site/public/images/\")",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"home:%{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"admin:%{http_code}\\\\n\" http://localhost:3000/admin)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s -o /tmp/home.html -w \"home:%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /tmp/admin.html -w \"admin:%{http_code}\\\\n\" http://localhost:3001/admin)",
+      "Read(//tmp/**)",
+      "Bash(kill %1)"
+    ]
+  }
+}
