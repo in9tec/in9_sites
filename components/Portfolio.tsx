@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { PORTFOLIO } from "@/content/site";
+import type { PortfolioItem } from "@/lib/db/types";
 
-export function Portfolio() {
+export function Portfolio({ items }: { items: PortfolioItem[] }) {
   return (
     <section id="portfolio" className="portfolio" data-screen-label="06 Portfólio">
       <div className="container">
@@ -14,7 +14,7 @@ export function Portfolio() {
         </div>
 
         <ul className="portfolio-grid">
-          {PORTFOLIO.map((p, i) => (
+          {items.map((p, i) => (
             <li key={i} className={`port ${p.feature ? "port--feature" : ""}`}>
               {p.image && (
                 <div className="port__img">

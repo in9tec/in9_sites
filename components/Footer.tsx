@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export function Footer() {
+export function Footer({ brand }: { brand: { name: string; handle: string } }) {
   const [time, setTime] = useState<Date | null>(null);
   useEffect(() => {
     setTime(new Date());
@@ -12,23 +12,24 @@ export function Footer() {
   const timeStr = time
     ? time.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }) + " BRT"
     : "—";
+  const giant = brand.handle.replace(/^\/\s*/, "");
 
   return (
     <footer className="footer">
       <div className="container footer__grid">
         <div className="footer__col">
-          <span className="brand__name">Nathan Vasconcelos</span>
-          <span className="muted">/ novasconcelos</span>
+          <span className="brand__name">{brand.name}</span>
+          <span className="muted">{brand.handle}</span>
         </div>
         <div className="footer__col">
-          <span className="muted"> </span>
+          <span className="muted">BRT</span>
           <span className="tabular">{timeStr}</span>
         </div>
         <div className="footer__col">
-          <span className="muted tabular">© 2026 — Todos os direitos reservados</span>
+          <span className="muted tabular">© {new Date().getFullYear()} — Todos os direitos reservados</span>
         </div>
       </div>
-      <div className="footer__giant" aria-hidden="true">novasconcelos</div>
+      <div className="footer__giant" aria-hidden="true">{giant}</div>
     </footer>
   );
 }

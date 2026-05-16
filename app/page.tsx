@@ -1,33 +1,37 @@
-import { Conteudos } from "@/components/Conteudos";
-import { Consultoria } from "@/components/Consultoria";
-import { Contato } from "@/components/Contato";
-import { Ferramentas } from "@/components/Ferramentas";
-import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
-import { Portfolio } from "@/components/Portfolio";
-import { Sobre } from "@/components/Sobre";
-import { Stats } from "@/components/Stats";
-import { TopBar } from "@/components/TopBar";
-import { getSections, isEnabled } from "@/lib/sections";
+import Link from "next/link";
+import { db } from "@/lib/db";
+import { isDev } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  const cfg = await getSections();
+export default async function RootPage() {
+  const tenants = await db.listTenants();
   return (
-    <div className="site">
-      <TopBar sections={cfg} />
-      <main>
-        {isEnabled(cfg, "hero") && <Hero />}
-        {isEnabled(cfg, "stats") && <Stats />}
-        {isEnabled(cfg, "sobre") && <Sobre />}
-        {isEnabled(cfg, "conteudos") && <Conteudos />}
-        {isEnabled(cfg, "ferramentas") && <Ferramentas />}
-        {isEnabled(cfg, "consultoria") && <Consultoria />}
-        {isEnabled(cfg, "portfolio") && <Portfolio />}
-        {isEnabled(cfg, "contato") && <Contato />}
-      </main>
-      <Footer />
-    </div>
+    <main className="landing">
+      <div className="landing__inner">
+        <p className="landing__eyebrow tabular">— Plataforma</p>
+        <h1 className="landing__title">Sites pessoais editoriais.</h1>
+        <p className="landing__sub">
+          Plataforma para criar e gerenciar sites pessoais com seções configuráveis, tema próprio e conteúdo gerenciável.
+        </p>
+
+        {isDev() && (
+          <div className="landing__dev">
+            <p className="eyebrow tabular">— Dev mode</p>
+            <ul className="landing__tenants">
+              {tenants.map((t) => (
+                <li key={t.id}>
+                  <Link href={`/${t.slug}`} className="link-row">
+                    <span className="link-row__label">{t.slug}</span>
+                    <span className="link-row__handle">{t.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/admin" className="btn btn--ghost btn--sm">Painel admin</Link>
+          </div>
+        )}
+      </div>
+    </main>
   );
 }

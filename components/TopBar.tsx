@@ -1,9 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { NAV_SECTIONS, SECTION_LABELS, type SectionId, type SectionsConfig } from "@/lib/types";
+import {
+  NAV_SECTIONS,
+  SECTION_LABELS,
+  type SectionId,
+} from "@/lib/db/types";
 
-export function TopBar({ sections }: { sections: SectionsConfig }) {
+export function TopBar({
+  enabledSections,
+  brand,
+}: {
+  enabledSections: SectionId[];
+  brand: { name: string; handle: string };
+}) {
   const [active, setActive] = useState<SectionId>("hero");
   const [navOpen, setNavOpen] = useState(false);
   const [time, setTime] = useState<Date | null>(null);
@@ -15,7 +25,6 @@ export function TopBar({ sections }: { sections: SectionsConfig }) {
   }, []);
 
   useEffect(() => {
-    const ids: SectionId[] = ["hero", "sobre", "conteudos", "ferramentas", "consultoria", "portfolio", "contato"];
     const obs = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
@@ -23,16 +32,20 @@ export function TopBar({ sections }: { sections: SectionsConfig }) {
         }),
       { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
     );
-    ids.forEach((id) => {
+    enabledSections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
     return () => obs.disconnect();
-  }, []);
+  }, [enabledSections]);
 
   const items = useMemo(
-    () => NAV_SECTIONS.filter((id) => sections[id] !== false).map((id) => ({ id, label: SECTION_LABELS[id] })),
-    [sections]
+    () =>
+      NAV_SECTIONS.filter((id) => enabledSections.includes(id)).map((id) => ({
+        id,
+        label: SECTION_LABELS[id],
+      })),
+    [enabledSections]
   );
 
   const scrollTo = (id: string) => {
@@ -55,8 +68,8 @@ export function TopBar({ sections }: { sections: SectionsConfig }) {
               <path d="M3 21V3l18 18V3" fill="none" stroke="currentColor" strokeWidth="1.6" />
             </svg>
           </span>
-          <span className="brand__name">Nathan Vasconcelos</span>
-          <span className="brand__handle">/ novasconcelos</span>
+          <span className="brand__name">{brand.name}</span>
+          <span className="brand__handle">{brand.handle}</span>
         </button>
         <nav className="nav" aria-label="Principal">
           {items.map((it) => (
@@ -71,8 +84,6 @@ export function TopBar({ sections }: { sections: SectionsConfig }) {
           ))}
         </nav>
         <div className="topbar__meta">
-          <span className="meta__loc"></span>
-          <span className="meta__sep" aria-hidden="true">·</span>
           <span className="meta__time tabular">{timeStr}</span>
         </div>
         <button className={`burger ${navOpen ? "is-open" : ""}`} aria-label="Menu" onClick={() => setNavOpen((v) => !v)}>

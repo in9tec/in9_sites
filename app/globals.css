@@ -25,7 +25,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-sans: "Inter Tight", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-html[data-theme="dark"] {
+[data-theme="dark"] {
   --bg:        #0E0D0C;
   --bg-2:      #16151300;
   --bg-3:      #232220;
@@ -60,6 +60,13 @@ em { font-style: normal; color: var(--fg); border-bottom: 1px solid var(--accent
 ::selection { background: var(--accent); color: var(--bg); }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; background: none; border: 0; color: inherit; padding: 0; }
+
+/* Wrapper por tenant — aplica o tema (bg/fg) no div raiz */
+.tenant {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100dvh;
+}
 
 .container {
   max-width: 1320px;
@@ -767,3 +774,47 @@ html[data-theme="dark"] .tool__icon { filter: brightness(1.05); }
 .admin__row-label { font-size: 15px; }
 .admin__row-id { font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 .admin__actions { display: flex; gap: 12px; margin-top: 24px; }
+
+/* ============================================================ ADMIN SHELL (v2) */
+.admin-shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; background: var(--bg-2); }
+.admin-shell__nav { background: var(--bg); border-right: 1px solid var(--line-soft); padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 0; height: 100vh; }
+.admin-shell__brand { display: flex; align-items: center; gap: 8px; }
+.admin-shell__devbadge { font-size: 10px; padding: 2px 6px; background: var(--accent); color: #fff; border-radius: 2px; }
+.admin-shell__links { display: flex; flex-direction: column; gap: 2px; }
+.admin-shell__links a { padding: 8px 10px; border-radius: 2px; font-size: 14px; color: var(--muted); transition: color .15s, background .15s; }
+.admin-shell__links a:hover { color: var(--fg); background: var(--bg-3); }
+.admin-shell__user { margin-top: auto; font-size: 12px; }
+.admin-shell__main { padding: 40px 48px; max-width: 960px; }
+.admin-page__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+.admin-page__title { font-family: var(--font-mono); font-size: 28px; letter-spacing: -0.02em; margin: 6px 0 12px; }
+.admin-page__h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-family: var(--font-mono); margin: 32px 0 12px; }
+.admin-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line-soft); }
+.admin-list__row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+.admin-list__row strong { font-weight: 500; }
+.admin-list__code { display: inline-block; font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-left: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+.admin-list__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.admin-pre { background: var(--bg-3); padding: 12px; font-size: 12px; overflow: auto; max-width: 720px; }
+.admin__form--row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; align-items: end; }
+.admin__form--row .btn { height: 42px; align-self: end; }
+.admin__field select { padding: 11px 12px; border: 1px solid var(--line-soft); background: var(--bg); color: var(--fg); font: inherit; font-family: var(--font-sans); font-size: 14px; text-transform: none; letter-spacing: normal; }
+
+/* ============================================================ LANDING */
+.landing { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+.landing__inner { max-width: 640px; }
+.landing__eyebrow { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+.landing__title { font-family: var(--font-mono); font-size: clamp(32px, 4vw, 56px); letter-spacing: -0.03em; line-height: 1.04; margin: 0 0 16px; }
+.landing__sub { color: var(--muted); font-size: 18px; max-width: 48ch; margin: 0 0 40px; }
+.landing__dev { border-top: 1px solid var(--line-soft); padding-top: 24px; margin-top: 24px; }
+.landing__tenants { list-style: none; padding: 0; margin: 0 0 16px; }
+.landing__tenants .link-row { grid-template-columns: 120px 1fr; }
+
+/* ============================================================ AUTH (stubs) */
+.auth { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 24px; background: var(--bg-2); }
+.auth__box { width: 100%; max-width: 480px; background: var(--bg); border: 1px solid var(--line-soft); padding: 40px; }
+.auth__title { font-family: var(--font-mono); font-size: 24px; letter-spacing: -0.02em; margin: 0 0 12px; }
+
+@media (max-width: 768px) {
+  .admin-shell { grid-template-columns: 1fr; }
+  .admin-shell__nav { position: static; height: auto; flex-direction: row; flex-wrap: wrap; }
+  .admin-shell__main { padding: 24px; }
+}

@@ -1,8 +1,8 @@
-import { CONTACT_LINKS } from "@/content/site";
+import type { ContactLink } from "@/lib/db/types";
 import { Arrow } from "./Arrow";
 import { SectionHeader } from "./SectionHeader";
 
-export function Contato() {
+export function Contato({ links }: { links: ContactLink[] }) {
   return (
     <section id="contato" className="contato" data-screen-label="07 Contato">
       <div className="container section-grid">
@@ -11,7 +11,7 @@ export function Contato() {
           <h2 className="h2">Direto, sem fricção.</h2>
           <p className="lead">Escolha o canal mais conveniente. Eu respondo pessoalmente.</p>
           <ul className="links">
-            {CONTACT_LINKS.map((l) => (
+            {links.map((l) => (
               <li key={l.label}>
                 <a href={l.href} target="_blank" rel="noreferrer" className="link-row">
                   <span className="link-row__label">{l.label}</span>

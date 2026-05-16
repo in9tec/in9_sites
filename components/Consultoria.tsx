@@ -1,8 +1,8 @@
-import { HELP, SERVICES } from "@/content/site";
+import type { Service } from "@/lib/db/types";
 import { Arrow } from "./Arrow";
 import { ServiceIcon } from "./ServiceIcon";
 
-export function Consultoria() {
+export function Consultoria({ services, help }: { services: Service[]; help: string[] }) {
   return (
     <section id="consultoria" className="consultoria" data-screen-label="05 Consultoria">
       <div className="container">
@@ -17,7 +17,7 @@ export function Consultoria() {
         </p>
 
         <ul className="services-grid">
-          {SERVICES.map((s) => (
+          {services.map((s) => (
             <li className="card-srv" key={s.n}>
               <div className="card-srv__top">
                 <span className="card-srv__n tabular">{s.n}</span>
@@ -32,7 +32,7 @@ export function Consultoria() {
         <div className="consultoria__problems">
           <p className="eyebrow eyebrow--invert tabular">— O que eu ajudo a resolver</p>
           <ul className="problems">
-            {HELP.map((h, i) => (
+            {help.map((h, i) => (
               <li key={i}>
                 <span className="problems__n tabular">{String(i + 1).padStart(2, "0")}</span>
                 <span>{h}</span>

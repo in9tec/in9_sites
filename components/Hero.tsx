@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { COPY } from "@/content/site";
+import type { CopyContent } from "@/lib/db/types";
 import { Arrow } from "./Arrow";
 
-export function Hero() {
+export function Hero({ copy }: { copy: CopyContent }) {
   return (
     <section id="hero" className="hero" data-screen-label="01 Hero">
       <div className="hero__grid">
@@ -11,13 +11,13 @@ export function Hero() {
             <span className="kicker__num tabular">00 / Início</span>
             <span className="kicker__bar" aria-hidden="true" />
             <span className="kicker__avail">
-              <span className="dot dot--live" aria-hidden="false" />
-           
+              <span className="dot dot--live" aria-hidden="true" />
+              Disponível para consultoria
             </span>
           </div>
-          <h1 className="display">{COPY.headline}</h1>
-          <p className="display__sub">{COPY.subheadline}</p>
-          <p className="hero__sub">{COPY.heroDescription}</p>
+          <h1 className="display">{copy.headline}</h1>
+          <p className="display__sub">{copy.subheadline}</p>
+          <p className="hero__sub">{copy.heroDescription}</p>
           <div className="hero__ctas">
             <a className="btn btn--primary" href="#conteudos">
               <span>Ver conteúdos</span><Arrow />
@@ -32,7 +32,7 @@ export function Hero() {
           <div className="portrait-frame">
             <Image
               src="/images/nathan-portrait.jpg"
-              alt="Nathan Vasconcelos"
+              alt="Retrato"
               width={800}
               height={1000}
               priority

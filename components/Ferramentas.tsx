@@ -1,7 +1,7 @@
-import { TOOLS } from "@/content/site";
+import type { Tool } from "@/lib/db/types";
 import { ToolIcon } from "./ToolIcon";
 
-export function Ferramentas() {
+export function Ferramentas({ items }: { items: Tool[] }) {
   return (
     <section id="ferramentas" className="ferramentas" data-screen-label="04 Ferramentas">
       <div className="container">
@@ -16,7 +16,7 @@ export function Ferramentas() {
         </p>
 
         <ul className="tools-grid">
-          {TOOLS.map((t, i) => (
+          {items.map((t, i) => (
             <li className={`tool ${t.icon === "plus" ? "tool--more" : ""}`} key={i}>
               <span className="tool__icon"><ToolIcon id={t.icon} /></span>
               <span className="tool__name">{t.name}</span>

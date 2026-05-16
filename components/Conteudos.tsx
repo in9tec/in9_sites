@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ARTICLES } from "@/content/site";
+import type { Article } from "@/lib/db/types";
 import { Arrow } from "./Arrow";
 
-export function Conteudos() {
-  const tags = useMemo(() => ["Tudo", ...Array.from(new Set(ARTICLES.map((a) => a.tag)))], []);
+export function Conteudos({ articles }: { articles: Article[] }) {
+  const tags = useMemo(() => ["Tudo", ...Array.from(new Set(articles.map((a) => a.tag)))], [articles]);
   const [tag, setTag] = useState("Tudo");
-  const list = tag === "Tudo" ? ARTICLES : ARTICLES.filter((a) => a.tag === tag);
+  const list = tag === "Tudo" ? articles : articles.filter((a) => a.tag === tag);
 
   return (
     <section id="conteudos" className="conteudos" data-screen-label="03 Conteúdos">

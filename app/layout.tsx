@@ -16,18 +16,13 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nathan Vasconcelos — Tecnologia além do código",
-  description:
-    "Carreira, soft skills, processos de desenvolvimento e estabilização de sistemas. Conteúdo e consultoria em tecnologia por Nathan Vasconcelos.",
-  openGraph: {
-    title: "Nathan Vasconcelos — Tecnologia além do código",
-    description: "Carreira, soft skills, processos de desenvolvimento e estabilização de sistemas.",
-  },
+  title: "Plataforma — sites pessoais",
+  description: "Plataforma multi-cliente para sites pessoais editoriais.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" data-theme="dark" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="pt-BR" className={`${sans.variable} ${mono.variable}`} data-theme="light">
       <body>{children}</body>
     </html>
   );

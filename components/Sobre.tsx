@@ -1,6 +1,7 @@
+import type { SobreContent } from "@/lib/db/types";
 import { SectionHeader } from "./SectionHeader";
 
-export function Sobre() {
+export function Sobre({ content }: { content: SobreContent }) {
   return (
     <section id="sobre" className="sobre" data-screen-label="02 Sobre">
       <div className="container section-grid">
@@ -15,10 +16,12 @@ export function Sobre() {
           <p>Aqui eu compartilho o que realmente faz diferença na prática.</p>
 
           <dl className="facts">
-            <div><dt>Atuação</dt><dd>Desenvolvimento, arquitetura, liderança técnica</dd></div>
-            <div><dt>Foco</dt><dd>Processos, estabilização, decisão técnica</dd></div>
-            <div><dt>Escrita</dt><dd>Carreira, soft skills, operação</dd></div>
-            <div><dt>Base</dt><dd>Brasil</dd></div>
+            {content.facts.map((f, i) => (
+              <div key={i}>
+                <dt>{f.dt}</dt>
+                <dd>{f.dd}</dd>
+              </div>
+            ))}
           </dl>
         </div>
       </div>
