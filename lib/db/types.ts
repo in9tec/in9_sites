@@ -10,7 +10,15 @@ export type SectionId =
   | "ferramentas"
   | "consultoria"
   | "portfolio"
-  | "contato";
+  | "contato"
+  // in9 sections
+  | "diagnostico"
+  | "solucoes"
+  | "projetos"
+  | "porqueinov"
+  | "processo"
+  | "testimonials"
+  | "finalcta";
 
 export type Role = "owner" | "editor";
 export type InviteStatus = "pending" | "accepted" | "revoked" | "expired";
@@ -166,6 +174,14 @@ export const SECTION_LABELS: Record<SectionId, string> = {
   consultoria: "Consultoria",
   portfolio: "Portfólio",
   contato: "Contato",
+  // in9 sections
+  diagnostico: "Diagnóstico",
+  solucoes: "Soluções",
+  projetos: "Projetos",
+  porqueinov: "Por que In9",
+  processo: "Processo",
+  testimonials: "Depoimentos",
+  finalcta: "CTA Final",
 };
 
 export const NAV_SECTIONS: SectionId[] = [

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const sans = Inter_Tight({
@@ -14,6 +14,13 @@ const mono = JetBrains_Mono({
   weight: ["400", "500", "600"],
   display: "swap",
 });
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Plataforma — sites pessoais",
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${mono.variable}`} data-theme="light">
+    <html lang="pt-BR" className={`${sans.variable} ${mono.variable} ${serif.variable}`} data-theme="light">
       <body>{children}</body>
     </html>
   );

@@ -9,6 +9,7 @@ import { Portfolio } from "@/components/Portfolio";
 import { Sobre } from "@/components/Sobre";
 import { Stats } from "@/components/Stats";
 import { TopBar } from "@/components/TopBar";
+import { In9Page } from "@/components/in9/In9Page";
 import { db } from "@/lib/db";
 import type { ContentMap, SectionId } from "@/lib/db/types";
 
@@ -22,6 +23,13 @@ export default async function TenantHome({
   const { tenant: slug } = await params;
   const tenant = await db.getTenantBySlug(slug);
   if (!tenant) notFound();
+
+  // in9 — renders its own full-page component
+  if (slug === "in9") {
+    const sections = await db.getSections(tenant.id);
+    const enabled = sections.filter((s) => s.enabled).map((s) => s.section_id);
+    return <In9Page enabledSections={enabled} />;
+  }
 
   const [sections, copy, stats, articles, tools, services, help, portfolio, contact, sobre] = await Promise.all([
     db.getSections(tenant.id),
