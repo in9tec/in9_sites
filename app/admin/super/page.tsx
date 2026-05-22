@@ -24,6 +24,13 @@ export default async function SuperPage() {
           <span>Nome</span>
           <input name="name" required placeholder="João Silva" />
         </label>
+        <label className="admin__field">
+          <span>Layout</span>
+          <select name="layout_type" defaultValue="personal">
+            <option value="personal">Personal</option>
+            <option value="corporate">Corporate</option>
+          </select>
+        </label>
         <button type="submit" className="btn btn--primary">Criar</button>
       </form>
 
@@ -37,7 +44,7 @@ export default async function SuperPage() {
             </div>
             <div className="admin-list__actions">
               <Link href={`/${t.slug}`} target="_blank" className="btn btn--ghost btn--sm">Ver</Link>
-              <Link href={`/admin/sections?tenant=${t.slug}`} className="btn btn--ghost btn--sm">Seções</Link>
+              <Link href={`/admin/content?tenant=${t.slug}`} className="btn btn--ghost btn--sm">Conteúdo</Link>
               <Link href={`/admin/members?tenant=${t.slug}`} className="btn btn--ghost btn--sm">Membros</Link>
             </div>
           </li>

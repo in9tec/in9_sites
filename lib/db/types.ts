@@ -23,10 +23,13 @@ export type SectionId =
 export type Role = "owner" | "editor";
 export type InviteStatus = "pending" | "accepted" | "revoked" | "expired";
 
+export type LayoutType = "personal" | "corporate";
+
 export interface Tenant {
   id: string;
   slug: string;
   name: string;
+  layout_type: LayoutType;
   created_at: string;
 }
 
@@ -150,6 +153,76 @@ export interface SobreContent {
   facts: { dt: string; dd: string }[];
 }
 
+// ============================================================
+// Shapes do conteúdo in9 (editáveis via admin)
+// ============================================================
+
+export interface In9HeroContent {
+  note: string;
+  lede: string;
+  status: string;
+}
+
+export interface In9Projeto {
+  cat: string;
+  name: string;
+  sector: string;
+  body: string;
+  hue: number;
+  year: string;
+}
+
+export interface In9Testimonial {
+  q: string;
+  name: string;
+  role: string;
+}
+
+export interface In9CtaContent {
+  title: string;
+  lede: string;
+  vagas: string;
+}
+
+export interface In9DiagCard {
+  n: string;
+  tone: string;
+  icon: string;
+  title: string;
+  desc: string;
+  result: string;
+}
+
+export interface In9DiagContent {
+  problemHeadline: string;
+  problemLede: string;
+  solutionLede: string;
+  bannerHeadline: string;
+  bannerDesc: string;
+  features: string[];
+  cards: In9DiagCard[];
+}
+
+export interface In9SolucaoItem {
+  n: string;
+  t: string;
+  d: string;
+  tags: string;
+}
+
+export interface In9WhyItem {
+  n: string;
+  t: string;
+  d: string;
+}
+
+export interface In9ProcessoStep {
+  n: string;
+  t: string;
+  d: string;
+  dur: string;
+}
+
 // Mapa de chave → shape esperado (referência para o editor)
 export type ContentMap = {
   copy: CopyContent;
@@ -161,6 +234,15 @@ export type ContentMap = {
   portfolio: PortfolioItem[];
   contact: ContactLink[];
   sobre: SobreContent;
+  // in9 keys
+  "in9-hero": In9HeroContent;
+  "in9-projetos": In9Projeto[];
+  "in9-testimonials": In9Testimonial[];
+  "in9-cta": In9CtaContent;
+  "in9-diagnostico": In9DiagContent;
+  "in9-solucoes": In9SolucaoItem[];
+  "in9-porqueinov": In9WhyItem[];
+  "in9-processo": In9ProcessoStep[];
 };
 
 export type ContentKey = keyof ContentMap;

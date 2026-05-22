@@ -5,17 +5,22 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { requireSuper } from "@/lib/auth";
 import { DEFAULT_SECTION_ORDER } from "@/lib/db/types";
+import { CreateTenantSchema } from "@/lib/validation";
 
 export async function createTenantAction(formData: FormData) {
   await requireSuper();
-  const slug = String(formData.get("slug") || "").trim().toLowerCase();
-  const name = String(formData.get("name") || "").trim();
-  if (!/^[a-z0-9-]+$/.test(slug)) redirect("/admin/super");
-  if (!name) redirect("/admin/super");
 
-  const tenant = await db.createTenant({ slug, name });
+  const parsed = CreateTenantSchema.safeParse({
+    slug:        String(formData.get("slug") || "").trim().toLowerCase(),
+    name:        String(formData.get("name") || "").trim(),
+    layout_type: formData.get("layout_type") ?? "personal",
+  });
+  if (!parsed.success) redirect("/admin/super");
 
-  // Cria as 8 seções habilitadas por padrão
+  const { slug, name, layout_type } = parsed.data;
+  const tenant = await db.createTenant({ slug, name, layout_type });
+
+  // Seções padrão (layout personal). Layout corporate tem seções próprias — definir manualmente depois.
   await db.setSectionsBulk(
     tenant.id,
     DEFAULT_SECTION_ORDER.map((id) => ({ section_id: id, enabled: true }))
@@ -27,5 +32,5 @@ export async function createTenantAction(formData: FormData) {
   });
 
   revalidatePath("/admin/super");
-  redirect(`/admin/sections?tenant=${slug}`);
+  redirect(`/admin/content?tenant=${slug}`);
 }

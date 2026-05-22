@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
+import type { In9HeroContent } from "@/lib/db/types";
 
 function LiveClock() {
   const [time, setTime] = useState<Date | null>(null);
@@ -25,7 +26,11 @@ function LiveClock() {
   );
 }
 
-export function Hero() {
+interface Props {
+  content: In9HeroContent;
+}
+
+export function Hero({ content }: Props) {
   return (
     <section id="top" className="in9-hero">
       <div className="container in9-hero__body">
@@ -36,8 +41,9 @@ export function Hero() {
               <Logo size={180} withTagline />
             </div>
             <p className="in9-hero__mark-note">
-              Estúdio brasileiro de tecnologia.<br />
-              +12 anos transformando ideia em produto.
+              {content.note.split("\n").map((line, i) => (
+                <span key={i}>{line}{i < content.note.split("\n").length - 1 && <br />}</span>
+              ))}
             </p>
           </div>
 
@@ -54,11 +60,7 @@ export function Hero() {
 
             <div className="in9-hero__lede-wrap">
               <span className="in9-hero__rule" />
-              <p className="in9-hero__lede">
-                Tecnologia feita à mão para quem pensa adiante. Projetamos sites,
-                catálogos e plataformas sob medida — combinando engenharia moderna,
-                design centrado no humano e entrega artesanal.
-              </p>
+              <p className="in9-hero__lede">{content.lede}</p>
             </div>
 
             <div className="in9-hero__ctas">
@@ -70,7 +72,7 @@ export function Hero() {
               </a>
               <span className="in9-hero__status">
                 <span className="in9-pulse" aria-hidden="true" />
-                Aceitando projetos
+                {content.status}
               </span>
             </div>
           </div>

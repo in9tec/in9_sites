@@ -1,19 +1,17 @@
-const ITEMS = [
-  { n: "01", t: "Abordagem personalizada", d: "Cada projeto começa com uma imersão real no negócio. Sem templates, sem decks genéricos." },
-  { n: "02", t: "Arquitetura escalável",   d: "Stack moderna pensada para crescer com você — Next.js, TypeScript, Postgres, edge." },
-  { n: "03", t: "Tecnologias modernas",    d: "Trabalhamos com o estado da arte. React Server Components, IA aplicada, design tokens." },
-  { n: "04", t: "Pensamento estratégico",  d: "Engenharia + produto + negócio na mesma sala. Decisões com contexto, não opiniões soltas." },
-  { n: "05", t: "Entrega rápida com qualidade", d: "Sprints curtos, releases semanais e revisão técnica em cada pull request." },
-];
+import type { In9WhyItem } from "@/lib/db/types";
 
-export function PorQueInov() {
+interface Props {
+  items: In9WhyItem[];
+}
+
+export function PorQueInov({ items }: Props) {
   return (
     <section
       id="por-que"
       style={{
         borderTop: "1px solid var(--line)",
         borderBottom: "1px solid var(--line)",
-        background: "linear-gradient(180deg, transparent, oklch(0.12 0.012 265 / 0.5))",
+        background: "linear-gradient(180deg, transparent, oklch(0.13 0.01 255 / 0.5))",
       }}
     >
       <div className="container">
@@ -33,7 +31,7 @@ export function PorQueInov() {
           </div>
 
           <div>
-            {ITEMS.map((it, i) => (
+            {items.map((it, i) => (
               <div
                 key={i}
                 style={{

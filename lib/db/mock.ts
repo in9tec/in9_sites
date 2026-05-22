@@ -84,12 +84,12 @@ export const adapter: DbAdapter = {
     if (!d) return null;
     return db.tenants.find((t) => t.id === d.tenant_id) ?? null;
   },
-  async createTenant({ slug, name }) {
+  async createTenant({ slug, name, layout_type = "personal" }) {
     const db = await load();
     if (db.tenants.some((t) => t.slug === slug)) {
       throw new Error(`Tenant slug "${slug}" already exists`);
     }
-    const t: Tenant = { id: randomUUID(), slug, name, created_at: nowIso() };
+    const t: Tenant = { id: randomUUID(), slug, name, layout_type, created_at: nowIso() };
     db.tenants.push(t);
     await persist();
     return t;

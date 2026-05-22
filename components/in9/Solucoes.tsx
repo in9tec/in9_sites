@@ -1,37 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import type { In9SolucaoItem } from "@/lib/db/types";
 
-const ITEMS = [
-  {
-    n: "01", t: "Sites institucionais",
-    d: "Presenças digitais que comunicam posicionamento, com performance e SEO de fábrica.",
-    tags: ["Next.js", "CMS", "SEO"],
-  },
-  {
-    n: "02", t: "Catálogos de produto",
-    d: "Vitrines navegáveis com filtros inteligentes, integração de estoque e checkout.",
-    tags: ["E-commerce", "API", "Headless"],
-  },
-  {
-    n: "03", t: "Plataformas de agendamento",
-    d: "Sistemas de marcação com confirmação automática, lembretes e gestão de agenda.",
-    tags: ["SaaS", "Webhooks", "WhatsApp"],
-  },
-  {
-    n: "04", t: "Sistemas personalizados",
-    d: "Software interno feito sob medida para o jeito que sua operação realmente funciona.",
-    tags: ["Dashboards", "Auth", "PostgreSQL"],
-  },
-  {
-    n: "05", t: "UX & UI Design",
-    d: "Design de interfaces e design systems que escalam com o produto e o time.",
-    tags: ["Figma", "Research", "Design System"],
-  },
-];
-
-function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }) {
+function SolutionCard({ item, large }: { item: In9SolucaoItem; large: boolean }) {
   const [hover, setHover] = useState(false);
+  const tags = item.tags.split(",").map((t) => t.trim()).filter(Boolean);
 
   return (
     <article
@@ -39,9 +13,9 @@ function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }
       onMouseLeave={() => setHover(false)}
       style={{
         position: "relative",
-        background: "linear-gradient(180deg, oklch(0.18 0.014 265 / 0.65), oklch(0.15 0.014 265 / 0.4))",
+        background: "linear-gradient(180deg, oklch(0.2 0.012 252 / 0.65), oklch(0.16 0.01 254 / 0.4))",
         backdropFilter: "blur(14px)",
-        border: `1px solid ${hover ? "oklch(0.55 0.05 260)" : "var(--line)"}`,
+        border: `1px solid ${hover ? "oklch(0.55 0.07 250)" : "var(--line)"}`,
         borderRadius: "var(--radius-lg)",
         padding: large ? "40px 36px" : "28px 26px",
         minHeight: large ? 420 : 200,
@@ -53,7 +27,6 @@ function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }
         transform: hover ? "translateY(-2px)" : "none",
       }}
     >
-      {/* glow */}
       <div
         aria-hidden="true"
         style={{
@@ -61,7 +34,7 @@ function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }
           inset: "-1px",
           borderRadius: "var(--radius-lg)",
           background: `radial-gradient(circle 240px at ${hover ? "50% 0%" : "50% 100%"}, var(--accent-soft), transparent 70%)`,
-          opacity: hover ? 1 : 0.35,
+          opacity: hover ? 0.8 : 0,
           transition: "opacity 0.4s, background 0.4s",
           pointerEvents: "none",
           zIndex: 0,
@@ -97,7 +70,7 @@ function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }
           {item.d}
         </p>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-          {item.tags.map((tag, i) => (
+          {tags.map((tag, i) => (
             <span key={i} style={{
               fontFamily: "var(--font-mono)",
               fontSize: 10,
@@ -106,7 +79,7 @@ function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }
               borderRadius: 999,
               border: "1px solid var(--line)",
               color: "var(--fg-2)",
-              background: "oklch(0.18 0.014 265 / 0.6)",
+              background: "oklch(0.2 0.012 252 / 0.6)",
             }}>
               {tag}
             </span>
@@ -117,7 +90,11 @@ function SolutionCard({ item, large }: { item: typeof ITEMS[0]; large: boolean }
   );
 }
 
-export function Solucoes() {
+interface Props {
+  items: In9SolucaoItem[];
+}
+
+export function Solucoes({ items }: Props) {
   return (
     <section id="solucoes">
       <div className="container">
@@ -146,7 +123,7 @@ export function Solucoes() {
         </div>
 
         <div className="in9-sol-grid">
-          {ITEMS.map((item, i) => (
+          {items.map((item, i) => (
             <SolutionCard key={i} item={item} large={i === 0} />
           ))}
         </div>

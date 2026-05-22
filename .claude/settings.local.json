@@ -17,7 +17,11 @@
       "Bash(curl -s -o /tmp/home.html -w \"home:%{http_code}\\\\n\" http://localhost:3001/)",
       "Bash(curl -s -o /tmp/admin.html -w \"admin:%{http_code}\\\\n\" http://localhost:3001/admin)",
       "Read(//tmp/**)",
-      "Bash(kill %1)"
+      "Bash(kill %1)",
+      "Bash(npx tsc *)",
+      "Bash(git check-ignore *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

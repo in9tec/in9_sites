@@ -1,35 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import type { In9Projeto } from "@/lib/db/types";
 
-const PROJECTS = [
-  {
-    cat: "Catálogo / B2B",
-    name: "Norte Materiais",
-    sector: "Construção · Manaus, AM",
-    body: "Catálogo digital com 4.200 SKUs, busca instantânea e cotação por WhatsApp.",
-    hue: 245,
-    year: "2025",
-  },
-  {
-    cat: "Agendamento",
-    name: "Clínica Vitruvio",
-    sector: "Saúde estética · Curitiba, PR",
-    body: "Plataforma de agendamento multi-profissional com confirmação automática.",
-    hue: 295,
-    year: "2025",
-  },
-  {
-    cat: "Site institucional",
-    name: "Cintia Arquitetura",
-    sector: "Arquitetura · São Paulo, SP",
-    body: "Portfólio editorial com gestão de cases pelo cliente e SEO orgânico.",
-    hue: 75,
-    year: "2024",
-  },
-];
-
-function ProjectRow({ p, idx }: { p: typeof PROJECTS[0]; idx: number }) {
+function ProjectRow({ p, idx }: { p: In9Projeto; idx: number }) {
   const [hover, setHover] = useState(false);
 
   return (
@@ -40,10 +14,10 @@ function ProjectRow({ p, idx }: { p: typeof PROJECTS[0]; idx: number }) {
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1.3fr",
-        border: `1px solid ${hover ? "oklch(0.5 0.05 260)" : "var(--line)"}`,
+        border: `1px solid ${hover ? "oklch(0.5 0.06 250)" : "var(--line)"}`,
         borderRadius: "var(--radius-lg)",
         overflow: "hidden",
-        background: "oklch(0.16 0.014 265 / 0.5)",
+        background: "oklch(0.185 0.012 252 / 0.5)",
         backdropFilter: "blur(14px)",
         transition: "border-color 0.3s, transform 0.3s",
       }}
@@ -52,7 +26,7 @@ function ProjectRow({ p, idx }: { p: typeof PROJECTS[0]; idx: number }) {
       <div style={{
         position: "relative",
         aspectRatio: "16/10",
-        background: `linear-gradient(135deg, oklch(0.22 0.04 ${p.hue}) 0%, oklch(0.15 0.02 ${p.hue}) 100%)`,
+        background: "linear-gradient(135deg, oklch(0.24 0.016 250) 0%, oklch(0.16 0.012 254) 100%)",
         overflow: "hidden",
       }}>
         {/* Browser chrome */}
@@ -96,8 +70,9 @@ function ProjectRow({ p, idx }: { p: typeof PROJECTS[0]; idx: number }) {
         <div style={{
           position: "absolute",
           inset: 0,
-          background: `radial-gradient(circle 300px at ${hover ? "70% 30%" : "50% 100%"}, oklch(0.7 0.2 ${p.hue} / 0.35), transparent 70%)`,
-          transition: "background 0.6s",
+          background: `radial-gradient(circle 300px at ${hover ? "70% 30%" : "50% 100%"}, var(--accent-soft), transparent 70%)`,
+          opacity: hover ? 1 : 0,
+          transition: "background 0.6s, opacity 0.4s",
           pointerEvents: "none",
         }} />
       </div>
@@ -137,7 +112,11 @@ function ProjectRow({ p, idx }: { p: typeof PROJECTS[0]; idx: number }) {
   );
 }
 
-export function Projetos() {
+interface Props {
+  projetos: In9Projeto[];
+}
+
+export function Projetos({ projetos }: Props) {
   return (
     <section id="projetos">
       <div className="container">
@@ -160,7 +139,7 @@ export function Projetos() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          {PROJECTS.map((p, i) => (
+          {projetos.map((p, i) => (
             <ProjectRow key={i} p={p} idx={i} />
           ))}
         </div>

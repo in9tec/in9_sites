@@ -1,6 +1,6 @@
 # Criar Página para Empresa — Guia de Decisão
 
-**Data:** 2026-05-15  
+**Data:** 2026-05-20  
 **Contexto:** Sistema multi-tenant já está pronto. Cada empresa (`/empresa`) tem suas próprias seções, conteúdo e tema.
 
 ---
@@ -31,7 +31,7 @@ GET /admin/super
 ### Passo 2: Decidir quais seções aparecem
 
 ```
-GET /admin/sections?tenant=empresa
+GET /admin/content?tenant=empresa
 → Desabilitar o que não faz sentido (ex: Portfolio pessoal, Sobre pessoal)
 → Habilitar só o que fica
 → Salvar
@@ -86,6 +86,8 @@ Domínio custom em produção: apontar `empresa.com.br` → Vercel → middlewar
 
 ## Caso B — Layout alternativo (tipo SaaS/LP)
 
+> **Nota:** `layout_type: "personal" | "corporate"` já existe no sistema. "corporate" usa o layout In9. Para um layout SaaS diferente, siga os passos abaixo.
+
 ### Quando usar
 - Navbar diferente (com pricing, features, CTA)
 - Seções completamente diferentes (Pricing, Testimonials, FAQ)
@@ -94,16 +96,11 @@ Domínio custom em produção: apontar `empresa.com.br` → Vercel → middlewar
 
 ### Passos para implementar
 
-#### 1. Adicionar `layout_type` no DB
+#### 1. Adicionar novo valor em `layout_type`
 
 Em `lib/db/types.ts`:
 ```ts
 export type LayoutType = "personal" | "corporate" | "saas";
-
-export interface Tenant {
-  // ... campos existentes
-  layout_type: LayoutType;
-}
 ```
 
 #### 2. Criar novo layout
@@ -176,9 +173,9 @@ Cada empresa pode ter seu próprio `components/tenants/empresa-nome/` com design
 ## Checklist por fase
 
 ### Hoje (mock-local, sem Supabase)
-- [ ] Criar tenant via `/admin/super`
-- [ ] Ajustar seções via `/admin/sections`
-- [ ] Editar `.data/db.json` na mão pra mudar copy/tema
+- [ ] Criar tenant via `/admin/super` (escolher `layout_type`)
+- [ ] Ajustar seções via `/admin/content?tenant=empresa`
+- [ ] Editar `.data/db.json` na mão pra mudar copy/tema (ou usar editor em `/admin/content/[key]`)
 - [ ] Verificar em `/empresa`
 
 ### Fase 3 (editor de conteúdo)

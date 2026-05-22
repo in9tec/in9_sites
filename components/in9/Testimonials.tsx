@@ -1,17 +1,10 @@
-const QUOTES = [
-  {
-    q: "A In9 entregou em seis semanas o que outra equipe não conseguiu em seis meses. Postura sênior do começo ao fim.",
-    name: "Rafael Coutinho",
-    role: "CEO · Norte Materiais",
-  },
-  {
-    q: "Cuidaram do produto como se fosse deles. O resultado fala por si: dobramos as marcações no primeiro mês.",
-    name: "Vivian Aoki",
-    role: "Sócia · Clínica Vitruvio",
-  },
-];
+import type { In9Testimonial } from "@/lib/db/types";
 
-export function Testimonials() {
+interface Props {
+  testimonials: In9Testimonial[];
+}
+
+export function Testimonials({ testimonials }: Props) {
   return (
     <section style={{ paddingTop: 0 }}>
       <div className="container">
@@ -22,7 +15,7 @@ export function Testimonials() {
           </span>
         </div>
         <div className="in9-testi-grid">
-          {QUOTES.map((q, i) => (
+          {testimonials.map((q, i) => (
             <figure
               key={i}
               style={{
@@ -30,7 +23,7 @@ export function Testimonials() {
                 padding: "40px 36px",
                 border: "1px solid var(--line)",
                 borderRadius: "var(--radius-lg)",
-                background: "oklch(0.16 0.014 265 / 0.4)",
+                background: "oklch(0.185 0.012 252 / 0.4)",
                 backdropFilter: "blur(14px)",
                 display: "flex",
                 flexDirection: "column",

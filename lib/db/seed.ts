@@ -8,6 +8,7 @@ import type {
   ContentMap,
   PortfolioItem,
   Profile,
+  SectionId,
   Service,
   Stat,
   Tenant,
@@ -24,6 +25,7 @@ import { DEFAULT_SECTION_ORDER } from "./types";
 export const DEV_USER_ID = "00000000-0000-0000-0000-000000000001";
 
 const NATHAN_ID = "00000000-0000-0000-0000-00000000000a";
+const IN9_ID    = "00000000-0000-0000-0000-00000000000b";
 
 const COPY: ContentMap["copy"] = {
   headline: "Tecnologia além\ndo código",
@@ -118,11 +120,108 @@ const THEME_NATHAN = {
   mode: "dark" as const,
 };
 
+// ── In9 Tecnologia ──────────────────────────────────────────────────────────
+
+const IN9_SECTIONS: { id: SectionId; enabled: boolean }[] = [
+  { id: "diagnostico",  enabled: true  },
+  { id: "solucoes",     enabled: true  },
+  { id: "processo",     enabled: true  }, // posição 03 — após Soluções
+  { id: "projetos",     enabled: true  },
+  { id: "porqueinov",   enabled: false }, // oculto
+  { id: "testimonials", enabled: true  },
+  { id: "finalcta",     enabled: true  },
+];
+
+const IN9_THEME = {
+  tokens: {
+    "bg":          "oklch(0.15 0.01 255)",
+    "bg-2":        "oklch(0.185 0.012 252)",
+    "bg-3":        "oklch(0.225 0.013 250)",
+    "line":        "oklch(0.34 0.014 250 / 0.5)",
+    "line-soft":   "oklch(0.34 0.014 250 / 0.24)",
+    "fg":          "oklch(0.96 0.006 240)",
+    "fg-2":        "oklch(0.75 0.01 245)",
+    "fg-3":        "oklch(0.55 0.012 250)",
+    "muted":       "oklch(0.55 0.012 250)",
+    "accent":      "oklch(0.68 0.15 250)",
+    "accent-2":    "oklch(0.75 0.13 240)",
+    "accent-soft": "oklch(0.68 0.15 250 / 0.14)",
+    "glow":        "oklch(0.68 0.15 250 / 0.26)",
+    "radius":      "14px",
+    "radius-lg":   "22px",
+  },
+  mode: "dark" as const,
+};
+
+const IN9_HERO = {
+  note: "Estúdio brasileiro de tecnologia.\n+12 anos transformando ideia em produto.",
+  lede: "Tecnologia feita à mão para quem pensa adiante. Projetamos sites, catálogos e plataformas sob medida — combinando engenharia moderna, design centrado no humano e entrega artesanal.",
+  status: "Aceitando projetos",
+};
+
+const IN9_PROJETOS = [
+  { cat: "Catálogo / B2B",      name: "Norte Materiais",  sector: "Construção · Manaus, AM",        body: "Catálogo digital com 4.200 SKUs, busca instantânea e cotação por WhatsApp.",                           hue: 245, year: "2025" },
+  { cat: "Agendamento",          name: "Clínica Vitruvio", sector: "Saúde estética · Curitiba, PR",  body: "Plataforma de agendamento multi-profissional com confirmação automática.",                             hue: 295, year: "2025" },
+  { cat: "Site institucional",   name: "Cintia Arquitetura", sector: "Arquitetura · São Paulo, SP", body: "Portfólio editorial com gestão de cases pelo cliente e SEO orgânico.",                                 hue: 75,  year: "2024" },
+];
+
+const IN9_TESTIMONIALS = [
+  { q: "A In9 entregou em seis semanas o que outra equipe não conseguiu em seis meses. Postura sênior do começo ao fim.", name: "Rafael Coutinho", role: "CEO · Norte Materiais" },
+  { q: "Cuidaram do produto como se fosse deles. O resultado fala por si: dobramos as marcações no primeiro mês.",       name: "Vivian Aoki",     role: "Sócia · Clínica Vitruvio" },
+];
+
+const IN9_CTA = {
+  title: "Vamos construir sua experiência digital.",
+  lede:  "Conte sobre o seu projeto. Em até 24 horas devolvemos um diagnóstico inicial com escopo, prazo e estimativa — sem custo, sem pressão.",
+  vagas: "3 vagas para Q3 / 2026",
+};
+
+const IN9_DIAGNOSTICO = {
+  problemHeadline: "O jeito antigo está custando caro para você.",
+  problemLede:     "Processos manuais, informações espalhadas e ferramentas desconectadas geram perda de tempo, erros e oportunidades perdidas.",
+  solutionLede:    "Soluções para  centralizar informações, eliminar tarefas manuais e te dar controle total do que realmente importa: seus resultados e clientes com serviço de qualidade.",
+  bannerHeadline:  "Menos bagunça. Mais controle. Mais tempo. Mais resultado.",
+  bannerDesc:      "In9 é o sistema que trabalha por você, enquanto você foca no que faz sua empresa crescer.",
+  features: ["Menos trabalho manual", "Mais agilidade e produtividade", "Decisões com dados reais", "Mais controle, menos risco"],
+  cards: [
+    { n: "01", tone: "blue",   icon: "creditcard", title: "Chega de caixa fechado.",               desc: "Acompanhe entradas, saídas e DRE em tempo real. Tenha clareza total do seu financeiro, sempre atualizado.",         result: "Decisões mais rápidas e lucratividade real." },
+    { n: "02", tone: "violet", icon: "box",        title: "Estoque inteligente, nada de achismo.",  desc: "Inventário em tempo real, alertas de mínimo e integração com vendas. Tenha o produto certo na hora certa.",         result: "Menos falta, menos excesso, mais giro." },
+    { n: "03", tone: "green",  icon: "users",      title: "Operação alinhada, time no controle.",   desc: "Processos claros dentro do sistema. Sua equipe segue o fluxo — sem ruídos e sem retrabalho.",                       result: "Mais eficiência e menos confusão." },
+    { n: "04", tone: "amber",  icon: "trending",   title: "Crescer com estrutura não é sorte, é sistema.", desc: "Arquitetura escalável para atender 10 ou 10 mil clientes — sem precisar refazer nada no caminho.",           result: "Crescimento sustentável sem limites." },
+    { n: "05", tone: "blue",   icon: "calendar",   title: "Agendamento online, acabou o vai e vem.", desc: "Seu cliente agenda, recebe lembrete e você organiza tudo automaticamente. Sem WhatsApp, sem planilhas.",           result: "Mais tempo para o que importa: seu cliente." },
+  ],
+};
+
+const IN9_SOLUCOES = [
+  { n: "01", t: "Sites institucionais",       d: "Presenças digitais que comunicam posicionamento, com performance e SEO de fábrica.",                  tags: "Next.js, CMS, SEO" },
+  { n: "02", t: "Catálogos de produto",       d: "Vitrines navegáveis com filtros inteligentes, integração de estoque e checkout.",                     tags: "E-commerce, API, Headless" },
+  { n: "03", t: "Plataformas de agendamento", d: "Sistemas de marcação com confirmação automática, lembretes e gestão de agenda.",                      tags: "SaaS, Webhooks, WhatsApp" },
+  { n: "04", t: "Sistemas personalizados",    d: "Software interno feito sob medida para o jeito que sua operação realmente funciona.",                 tags: "Dashboards, Auth, PostgreSQL" },
+  { n: "05", t: "UX & UI Design",             d: "Design de interfaces e design systems que escalam com o produto e o time.",                           tags: "Figma, Research, Design System" },
+];
+
+const IN9_PORQUEINOV = [
+  { n: "01", t: "Abordagem personalizada",      d: "Cada projeto começa com uma imersão real no negócio. Sem templates, sem decks genéricos." },
+  { n: "02", t: "Arquitetura escalável",         d: "Stack moderna pensada para crescer com você — Next.js, TypeScript, Postgres, edge." },
+  { n: "03", t: "Tecnologias modernas",          d: "Trabalhamos com o estado da arte. React Server Components, IA aplicada, design tokens." },
+  { n: "04", t: "Pensamento estratégico",        d: "Engenharia + produto + negócio na mesma sala. Decisões com contexto, não opiniões soltas." },
+  { n: "05", t: "Entrega rápida com qualidade",  d: "Sprints curtos, releases semanais e revisão técnica em cada pull request." },
+];
+
+const IN9_PROCESSO = [
+  { n: "01", t: "Descoberta",      d: "Imersão no negócio, entrevistas, mapeamento de jornadas e benchmarks.",                          dur: "~1 sem." },
+  { n: "02", t: "Estratégia",      d: "Definição de escopo, arquitetura da informação e métricas de sucesso.",                          dur: "~1 sem." },
+  { n: "03", t: "Design",          d: "Fluxos, wireframes, protótipos de alta fidelidade e design system.",                             dur: "~2 sem." },
+  { n: "04", t: "Desenvolvimento", d: "Engenharia em sprints curtos com revisão contínua e testes automatizados.",                      dur: "~3 sem." },
+  { n: "05", t: "Lançamento",      d: "Deploy, monitoramento, treinamento do time e ciclo de evolução contínua.",                       dur: "~1 sem." },
+];
+
 export function seed() {
   const now = new Date().toISOString();
 
   const tenants: Tenant[] = [
-    { id: NATHAN_ID, slug: "nathan", name: "Nathan Vasconcelos", created_at: now },
+    { id: NATHAN_ID, slug: "nathan", name: "Nathan Vasconcelos", layout_type: "personal",  created_at: now },
+    { id: IN9_ID,    slug: "in9",    name: "In9 Tecnologia",     layout_type: "corporate", created_at: now },
   ];
 
   const domains: TenantDomain[] = [
@@ -136,38 +235,60 @@ export function seed() {
 
   const members: TenantMember[] = [
     { tenant_id: NATHAN_ID, user_id: DEV_USER_ID, role: "owner" },
+    { tenant_id: IN9_ID,    user_id: DEV_USER_ID, role: "owner" },
   ];
 
   const invites: TenantInvite[] = [];
 
-  const sections: TenantSection[] = DEFAULT_SECTION_ORDER.map((id, i) => ({
-    tenant_id: NATHAN_ID,
-    section_id: id,
-    enabled: true,
-    position: i,
-  }));
+  const sections: TenantSection[] = [
+    // Nathan
+    ...DEFAULT_SECTION_ORDER.map((id, i) => ({
+      tenant_id: NATHAN_ID,
+      section_id: id,
+      enabled: true,
+      position: i,
+    })),
+    // In9
+    ...IN9_SECTIONS.map(({ id, enabled }, i) => ({
+      tenant_id: IN9_ID,
+      section_id: id,
+      enabled,
+      position: i,
+    })),
+  ];
 
   const content: TenantContent[] = [
-    { tenant_id: NATHAN_ID, key: "copy", value: COPY, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "stats", value: STATS, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "articles", value: ARTICLES, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "tools", value: TOOLS, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "services", value: SERVICES, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "help", value: HELP, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "portfolio", value: PORTFOLIO, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "contact", value: CONTACT_LINKS, updated_at: now },
-    { tenant_id: NATHAN_ID, key: "sobre", value: SOBRE, updated_at: now },
+    // Nathan
+    { tenant_id: NATHAN_ID, key: "copy",      value: COPY,          updated_at: now },
+    { tenant_id: NATHAN_ID, key: "stats",     value: STATS,         updated_at: now },
+    { tenant_id: NATHAN_ID, key: "articles",  value: ARTICLES,      updated_at: now },
+    { tenant_id: NATHAN_ID, key: "tools",     value: TOOLS,         updated_at: now },
+    { tenant_id: NATHAN_ID, key: "services",  value: SERVICES,      updated_at: now },
+    { tenant_id: NATHAN_ID, key: "help",      value: HELP,          updated_at: now },
+    { tenant_id: NATHAN_ID, key: "portfolio", value: PORTFOLIO,     updated_at: now },
+    { tenant_id: NATHAN_ID, key: "contact",   value: CONTACT_LINKS, updated_at: now },
+    { tenant_id: NATHAN_ID, key: "sobre",     value: SOBRE,         updated_at: now },
+    // In9
+    { tenant_id: IN9_ID, key: "in9-hero",         value: IN9_HERO,         updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-projetos",      value: IN9_PROJETOS,     updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-testimonials",  value: IN9_TESTIMONIALS, updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-cta",           value: IN9_CTA,          updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-diagnostico",   value: IN9_DIAGNOSTICO,  updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-solucoes",      value: IN9_SOLUCOES,     updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-porqueinov",    value: IN9_PORQUEINOV,   updated_at: now },
+    { tenant_id: IN9_ID, key: "in9-processo",      value: IN9_PROCESSO,     updated_at: now },
   ];
 
   const themes: TenantTheme[] = [
     { tenant_id: NATHAN_ID, tokens: THEME_NATHAN.tokens, mode: THEME_NATHAN.mode },
+    { tenant_id: IN9_ID,    tokens: IN9_THEME.tokens,    mode: IN9_THEME.mode    },
   ];
 
   return { tenants, domains, profiles, members, invites, sections, content, themes };
 }
 
 // Pequeno helper só pra evitar import cíclico em quem só quer o UUID.
-export const SEED_TENANT_IDS = { nathan: NATHAN_ID };
+export const SEED_TENANT_IDS = { nathan: NATHAN_ID, in9: IN9_ID };
 
 // O import abaixo é necessário só para tipo, mas mantém referência viva
 // para `randomUUID` (impede tree-shake quando o arquivo é importado em rotas server).

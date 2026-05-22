@@ -1,12 +1,10 @@
-const STEPS = [
-  { n: "01", t: "Descoberta",     d: "Imersão no negócio, entrevistas, mapeamento de jornadas e benchmarks.", dur: "~1 sem." },
-  { n: "02", t: "Estratégia",     d: "Definição de escopo, arquitetura da informação e métricas de sucesso.", dur: "~1 sem." },
-  { n: "03", t: "Design",         d: "Fluxos, wireframes, protótipos de alta fidelidade e design system.", dur: "~2 sem." },
-  { n: "04", t: "Desenvolvimento", d: "Engenharia em sprints curtos com revisão contínua e testes automatizados.", dur: "~3 sem." },
-  { n: "05", t: "Lançamento",     d: "Deploy, monitoramento, treinamento do time e ciclo de evolução contínua.", dur: "~1 sem." },
-];
+import type { In9ProcessoStep } from "@/lib/db/types";
 
-export function Processo() {
+interface Props {
+  steps: In9ProcessoStep[];
+}
+
+export function Processo({ steps }: Props) {
   return (
     <section id="processo">
       <div className="container">
@@ -21,7 +19,7 @@ export function Processo() {
         </div>
 
         <div className="in9-process-rail">
-          {STEPS.map((s, i) => (
+          {steps.map((s, i) => (
             <div key={i} className="in9-process-step">
               <div className="in9-process-step__line" aria-hidden="true" />
               <div style={{

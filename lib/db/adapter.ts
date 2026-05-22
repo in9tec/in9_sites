@@ -1,6 +1,7 @@
 import type {
   ContentKey,
   ContentMap,
+  LayoutType,
   Profile,
   Role,
   SectionId,
@@ -18,7 +19,7 @@ export interface DbAdapter {
   listTenants(): Promise<Tenant[]>;
   getTenantBySlug(slug: string): Promise<Tenant | null>;
   getTenantByHost(host: string): Promise<Tenant | null>;
-  createTenant(input: { slug: string; name: string }): Promise<Tenant>;
+  createTenant(input: { slug: string; name: string; layout_type?: LayoutType }): Promise<Tenant>;
 
   // ---------- Domains ----------
   listTenantDomains(tenantId: string): Promise<TenantDomain[]>;

@@ -1,4 +1,10 @@
-export function FinalCTA() {
+import type { In9CtaContent } from "@/lib/db/types";
+
+interface Props {
+  content: In9CtaContent;
+}
+
+export function FinalCTA({ content }: Props) {
   return (
     <section id="contato" style={{ paddingTop: 60, paddingBottom: 60 }}>
       <div className="container">
@@ -8,18 +14,8 @@ export function FinalCTA() {
           overflow: "hidden",
           border: "1px solid var(--line)",
           padding: "clamp(48px, 8vw, 96px) clamp(32px, 6vw, 80px)",
-          background: "linear-gradient(160deg, oklch(0.18 0.018 265) 0%, oklch(0.13 0.01 265) 100%)",
+          background: "linear-gradient(160deg, oklch(0.2 0.013 252) 0%, oklch(0.14 0.01 255) 100%)",
         }}>
-          {/* Glow */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              inset: 0,
-              pointerEvents: "none",
-              background: "radial-gradient(ellipse 60% 80% at 80% 100%, var(--accent-soft), transparent 65%), radial-gradient(ellipse 50% 70% at 10% 0%, oklch(0.65 0.22 295 / 0.18), transparent 65%)",
-            }}
-          />
           {/* Grid */}
           <div
             aria-hidden="true"
@@ -47,22 +43,18 @@ export function FinalCTA() {
               fontWeight: 500,
               letterSpacing: "-0.035em",
             }}>
-              Vamos construir sua<br />
+              {content.title.split(" ").slice(0, -2).join(" ")}<br />
               <em style={{
                 fontFamily: "var(--font-serif)",
                 fontStyle: "italic",
                 fontWeight: 400,
-                backgroundImage: "linear-gradient(110deg, var(--accent), var(--accent-2))",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
+                color: "var(--accent)",
               }}>
-                experiência digital.
+                {content.title.split(" ").slice(-2).join(" ")}
               </em>
             </h2>
             <p className="in9-lede" style={{ maxWidth: "52ch", marginBottom: 40 }}>
-              Conte sobre o seu projeto. Em até 24 horas devolvemos um diagnóstico
-              inicial com escopo, prazo e estimativa — sem custo, sem pressão.
+              {content.lede}
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
               <a href="mailto:ola@in9.studio" className="in9-btn in9-btn--primary">
@@ -83,7 +75,7 @@ export function FinalCTA() {
                 marginLeft: 8,
               }}>
                 <span className="in9-pulse" aria-hidden="true" />
-                3 vagas para Q3 / 2026
+                {content.vagas}
               </span>
             </div>
           </div>

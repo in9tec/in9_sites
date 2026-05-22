@@ -27,7 +27,7 @@ export default async function AdminDashboard() {
             </div>
             <div className="admin-list__actions">
               <Link href={`/${t.slug}`} target="_blank" className="btn btn--ghost btn--sm">Ver site</Link>
-              <Link href={`/admin/sections?tenant=${t.slug}`} className="btn btn--primary btn--sm">Gerenciar</Link>
+              <Link href={`/admin/content?tenant=${t.slug}`} className="btn btn--primary btn--sm">Gerenciar</Link>
             </div>
           </li>
         ))}

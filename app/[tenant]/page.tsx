@@ -24,11 +24,33 @@ export default async function TenantHome({
   const tenant = await db.getTenantBySlug(slug);
   if (!tenant) notFound();
 
-  // in9 — renders its own full-page component
-  if (slug === "in9") {
-    const sections = await db.getSections(tenant.id);
+  // Layout corporativo (in9 e futuros tenants com layout_type="corporate")
+  if (tenant.layout_type === "corporate") {
+    const [sections, heroContent, projetos, testimonials, ctaContent, diagContent, solucoes, whyItems, processoSteps] = await Promise.all([
+      db.getSections(tenant.id),
+      db.getContent(tenant.id, "in9-hero"),
+      db.getContent(tenant.id, "in9-projetos"),
+      db.getContent(tenant.id, "in9-testimonials"),
+      db.getContent(tenant.id, "in9-cta"),
+      db.getContent(tenant.id, "in9-diagnostico"),
+      db.getContent(tenant.id, "in9-solucoes"),
+      db.getContent(tenant.id, "in9-porqueinov"),
+      db.getContent(tenant.id, "in9-processo"),
+    ]);
     const enabled = sections.filter((s) => s.enabled).map((s) => s.section_id);
-    return <In9Page enabledSections={enabled} />;
+    return (
+      <In9Page
+        enabledSections={enabled}
+        heroContent={heroContent ?? { note: "", lede: "", status: "" }}
+        projetos={projetos ?? []}
+        testimonials={testimonials ?? []}
+        ctaContent={ctaContent ?? { title: "", lede: "", vagas: "" }}
+        diagContent={diagContent ?? { problemHeadline: "", problemLede: "", solutionLede: "", bannerHeadline: "", bannerDesc: "", features: [], cards: [] }}
+        solucoes={solucoes ?? []}
+        whyItems={whyItems ?? []}
+        processoSteps={processoSteps ?? []}
+      />
+    );
   }
 
   const [sections, copy, stats, articles, tools, services, help, portfolio, contact, sobre] = await Promise.all([
