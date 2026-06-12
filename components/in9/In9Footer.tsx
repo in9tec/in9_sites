@@ -6,7 +6,7 @@ export function In9Footer() {
       <div className="container">
         <div className="in9-footer__grid">
           <div>
-            <div style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.03em", display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ fontSize: 20, fontWeight: 500, letterSpacing: "-0.03em", display: "flex", alignItems: "center", gap: 12 }}>
               <Logo size={22} />
             </div>
             <p style={{ color: "var(--fg-2)", fontSize: 14, lineHeight: 1.55, maxWidth: "34ch", marginTop: 16 }}>
@@ -39,15 +39,12 @@ export function In9Footer() {
             <h4>Contato</h4>
             <ul>
               <li><a href="mailto:ola@in9.studio">ola@in9.studio</a></li>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">GitHub</a></li>
             </ul>
           </div>
         </div>
 
         <div className="in9-footer__bottom">
-          <span>© 2026 In9 Studio · CNPJ 00.000.000/0001-00</span>
+          <span>© 2026 In9 Studio</span>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
             <span className="in9-pulse" aria-hidden="true" />
             Operando · São Paulo / Remoto

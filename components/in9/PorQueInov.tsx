@@ -16,10 +16,10 @@ export function PorQueInov({ items }: Props) {
     >
       <div className="container">
         <div className="in9-why-grid">
-          <div style={{ position: "sticky", top: 120, alignSelf: "start" }}>
+          <div data-reveal style={{ position: "sticky", top: 120, alignSelf: "start" }}>
             <span className="in9-eyebrow">
               <span className="in9-eyebrow__bar" />
-              <span className="in9-eyebrow__num">04</span> — Por que In9
+              <span className="in9-eyebrow__num">05</span> — Por que In9
             </span>
             <h2 className="in9-h-title" style={{ fontSize: "clamp(34px, 4.2vw, 56px)" }}>
               Um estúdio,<br /> não uma <em>fábrica</em>.
@@ -34,7 +34,9 @@ export function PorQueInov({ items }: Props) {
             {items.map((it, i) => (
               <div
                 key={i}
+                data-reveal
                 style={{
+                  ["--reveal-delay" as string]: `${i * 70}ms`,
                   display: "grid",
                   gridTemplateColumns: "80px 1fr",
                   gap: 32,

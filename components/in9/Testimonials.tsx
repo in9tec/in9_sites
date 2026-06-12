@@ -6,19 +6,24 @@ interface Props {
 
 export function Testimonials({ testimonials }: Props) {
   return (
-    <section style={{ paddingTop: 0 }}>
+    <section id="depoimentos" style={{ paddingTop: 0 }}>
       <div className="container">
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <div data-reveal style={{ textAlign: "center", maxWidth: "48ch", margin: "0 auto 48px" }}>
           <span className="in9-eyebrow" style={{ justifyContent: "center" }}>
             <span className="in9-eyebrow__bar" />
             <span className="in9-eyebrow__num">06</span> — Confiança
           </span>
+          <h2 className="in9-h-title" style={{ fontSize: "clamp(34px, 4.2vw, 56px)", marginBottom: 0 }}>
+            Quem contratou, <em>recomenda.</em>
+          </h2>
         </div>
         <div className="in9-testi-grid">
           {testimonials.map((q, i) => (
             <figure
               key={i}
+              data-reveal
               style={{
+                ["--reveal-delay" as string]: `${i * 70}ms`,
                 margin: 0,
                 padding: "40px 36px",
                 border: "1px solid var(--line)",
@@ -38,7 +43,7 @@ export function Testimonials({ testimonials }: Props) {
                 height: 32,
                 display: "block",
               }}>
-                "
+                &ldquo;
               </span>
               <blockquote style={{
                 margin: 0,
@@ -70,7 +75,7 @@ export function Testimonials({ testimonials }: Props) {
                     {q.role}
                   </div>
                 </div>
-                <div style={{ display: "flex", gap: 2 }}>
+                <div style={{ display: "flex", gap: 2 }} role="img" aria-label="Avaliação 5 de 5">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <span key={s} style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", display: "block" }} />
                   ))}

@@ -184,15 +184,6 @@ export interface In9CtaContent {
   vagas: string;
 }
 
-export interface In9DiagCard {
-  n: string;
-  tone: string;
-  icon: string;
-  title: string;
-  desc: string;
-  result: string;
-}
-
 export interface In9DiagContent {
   problemHeadline: string;
   problemLede: string;
@@ -200,7 +191,6 @@ export interface In9DiagContent {
   bannerHeadline: string;
   bannerDesc: string;
   features: string[];
-  cards: In9DiagCard[];
 }
 
 export interface In9SolucaoItem {

@@ -9,6 +9,7 @@ import { Processo } from "./Processo";
 import { Testimonials } from "./Testimonials";
 import { FinalCTA } from "./FinalCTA";
 import { In9Footer } from "./In9Footer";
+import { RevealInit } from "./RevealInit";
 import type {
   SectionId,
   In9HeroContent,
@@ -48,6 +49,7 @@ export function In9Page({
 }: Props) {
   return (
     <div className="in9">
+      <RevealInit />
       <div className="in9__grid-bg" aria-hidden="true" />
       <div className="in9__glow-bg" aria-hidden="true" />
 

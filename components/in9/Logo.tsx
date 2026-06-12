@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface LogoProps {
   size?: number;
   withTagline?: boolean;
@@ -5,25 +7,26 @@ interface LogoProps {
 
 export function Logo({ size = 32, withTagline = false }: LogoProps) {
   return (
-    <span
-      className="in9-logo"
-      style={{ gap: Math.max(6, size * 0.18) }}
-    >
-      <span className="in9-logo__mark" style={{ fontSize: size }}>
-        <span>In</span>
-        <span
-          className="in9-logo__nine"
-          style={{ marginLeft: size * 0.02 }}
-        >
-          9
-        </span>
-      </span>
+    <span style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+      <Image
+        src="/in9-logo.png"
+        alt="In9"
+        width={size}
+        height={size}
+        style={{ borderRadius: size * 0.26, display: "block" }}
+        priority
+      />
       {withTagline && (
         <span
-          className="in9-logo__tagline"
-          style={{ fontSize: Math.max(10, size * 0.085) }}
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: Math.max(10, size * 0.075),
+            letterSpacing: "0.22em",
+            color: "var(--fg-3)",
+            textTransform: "uppercase",
+          }}
         >
-          Do conceito à realidade
+          Soluções e Tecnologia
         </span>
       )}
     </span>

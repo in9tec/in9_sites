@@ -40,6 +40,8 @@ async function load(): Promise<MockDB> {
     const raw = await fs.readFile(FILE, "utf8");
     cache = JSON.parse(raw) as MockDB;
   } catch {
+    // Sem snapshot em disco (ex.: produção serverless com filesystem efêmero):
+    // semeia em memória. persist() é best-effort — se o FS for read-only, segue em memória.
     cache = seed();
     await persist();
   }
@@ -50,8 +52,13 @@ async function persist(): Promise<void> {
   if (!cache) return;
   const snapshot = JSON.stringify(cache, null, 2);
   writing = writing.then(async () => {
-    await fs.mkdir(path.dirname(FILE), { recursive: true });
-    await fs.writeFile(FILE, snapshot, "utf8");
+    try {
+      await fs.mkdir(path.dirname(FILE), { recursive: true });
+      await fs.writeFile(FILE, snapshot, "utf8");
+    } catch {
+      // Filesystem read-only (produção). Mudanças vivem só em memória até o
+      // próximo cold start — esperado na v1 "congelada no seed".
+    }
   });
   await writing;
 }

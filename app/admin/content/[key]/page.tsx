@@ -297,10 +297,10 @@ function ContentEditor({ contentKey, value }: { contentKey: ContentKey; value: u
     }
 
     case "in9-diagnostico": {
-      const v = (value as { problemHeadline?: string; problemLede?: string; solutionLede?: string; bannerHeadline?: string; bannerDesc?: string; features?: string[]; cards?: { n: string; tone: string; icon: string; title: string; desc: string; result: string }[] }) ?? {};
+      const v = (value as { problemHeadline?: string; problemLede?: string; solutionLede?: string; bannerHeadline?: string; bannerDesc?: string; features?: string[] }) ?? {};
       return (
         <div className="admin__form">
-          <h2 className="admin-page__h2">Coluna esquerda</h2>
+          <h2 className="admin-page__h2">Coluna — O Problema</h2>
           <label className="admin__field">
             <span>Headline do problema</span>
             <input type="text" name="problemHeadline" defaultValue={v.problemHeadline ?? ""} />
@@ -309,6 +309,7 @@ function ContentEditor({ contentKey, value }: { contentKey: ContentKey; value: u
             <span>Lede do problema</span>
             <textarea name="problemLede" defaultValue={v.problemLede ?? ""} rows={3} />
           </label>
+          <h2 className="admin-page__h2">Coluna — A Solução</h2>
           <label className="admin__field">
             <span>Lede da solução</span>
             <textarea name="solutionLede" defaultValue={v.solutionLede ?? ""} rows={3} />
@@ -318,19 +319,6 @@ function ContentEditor({ contentKey, value }: { contentKey: ContentKey; value: u
             prefix="features"
             fields={[{ name: "label", label: "Label" }]}
             initialItems={(v.features ?? []).map((f) => ({ label: f }))}
-          />
-          <h2 className="admin-page__h2">Cards</h2>
-          <DynamicList
-            prefix="cards"
-            fields={[
-              { name: "n", label: "Nº" },
-              { name: "tone", label: "Cor (blue/violet/green/amber)" },
-              { name: "icon", label: "Ícone (creditcard/box/users/trending/calendar)" },
-              { name: "title", label: "Título", wide: true },
-              { name: "desc", label: "Descrição", type: "textarea", wide: true },
-              { name: "result", label: "Resultado" },
-            ]}
-            initialItems={v.cards ?? []}
           />
           <h2 className="admin-page__h2">Banner inferior</h2>
           <label className="admin__field">

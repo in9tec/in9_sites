@@ -10,10 +10,7 @@ export function Hero({ copy }: { copy: CopyContent }) {
           <div className="kicker">
             <span className="kicker__num tabular">00 / Início</span>
             <span className="kicker__bar" aria-hidden="true" />
-            <span className="kicker__avail">
-              <span className="dot dot--live" aria-hidden="true" />
-              Disponível para consultoria
-            </span>
+             
           </div>
           <h1 className="display">{copy.headline}</h1>
           <p className="display__sub">{copy.subheadline}</p>

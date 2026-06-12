@@ -1,27 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "./Logo";
 import type { In9HeroContent } from "@/lib/db/types";
 
-function LiveClock() {
-  const [time, setTime] = useState<Date | null>(null);
+const ROT_WORDS = ["intenção.", "precisão.", "estratégia.", "código."];
+
+function RotatingWord() {
+  const [index, setIndex] = useState(0);
+  const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
-    setTime(new Date());
-    const t = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(t);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cycle = setInterval(() => {
+      setLeaving(true);
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % ROT_WORDS.length);
+        setLeaving(false);
+      }, 250);
+    }, 2600);
+    return () => clearInterval(cycle);
   }, []);
 
-  if (!time) return <span>SP · --:--:--</span>;
-
-  const hh = String(time.getHours()).padStart(2, "0");
-  const mm = String(time.getMinutes()).padStart(2, "0");
-  const ss = String(time.getSeconds()).padStart(2, "0");
-
   return (
-    <span>
-      SP · {hh}:{mm}:<span style={{ color: "var(--fg-2)" }}>{ss}</span>
+    <span className={`in9-hero__rot${leaving ? " in9-hero__rot--leaving" : ""}`}>
+      {ROT_WORDS[index]}
     </span>
   );
 }
@@ -31,30 +34,36 @@ interface Props {
 }
 
 export function Hero({ content }: Props) {
+  const spotRef = useRef<HTMLDivElement>(null);
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const spot = spotRef.current;
+    if (!spot) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    spot.style.left = `${e.clientX - r.left}px`;
+    spot.style.top = `${e.clientY - r.top}px`;
+    spot.style.opacity = "1";
+  };
+
   return (
-    <section id="top" className="in9-hero">
+    <section id="top" className="in9-hero" onMouseMove={onMouseMove}>
+      <div ref={spotRef} className="in9-hero__spot" aria-hidden="true" />
       <div className="container in9-hero__body">
         <div className="in9-hero__grid">
           {/* Left: brand wordmark + tagline */}
-          <div className="in9-hero__left">
+          <div className="in9-hero__left" data-reveal>
             <div className="in9-hero__mark">
-              <Logo size={180} withTagline />
+              <Logo size={184} withTagline />
             </div>
-            <p className="in9-hero__mark-note">
-              {content.note.split("\n").map((line, i) => (
-                <span key={i}>{line}{i < content.note.split("\n").length - 1 && <br />}</span>
-              ))}
-            </p>
           </div>
 
           {/* Right: headline + lede + CTAs */}
-          <div className="in9-hero__right">
+          <div className="in9-hero__right" data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties}>
             <h1 className="in9-hero__title">
-              <span>Produtos</span>
-              <span>digitais</span>
+              <span>Produtos digitais</span>
               <span>
                 feitos com{" "}
-                <em className="in9-hero__em">intenção.</em>
+                <em className="in9-hero__em"><RotatingWord /></em>
               </span>
             </h1>
 
@@ -64,16 +73,12 @@ export function Hero({ content }: Props) {
             </div>
 
             <div className="in9-hero__ctas">
-              <a href="#diagnostico" className="in9-btn in9-btn--primary">
-                Ver soluções <span className="in9-btn__arrow">→</span>
+              <a href="#contato" className="in9-btn in9-btn--primary">
+                Agendar conversa <span className="in9-btn__arrow">→</span>
               </a>
-              <a href="#contato" className="in9-btn">
-                Agendar reunião
+              <a href="#solucoes" className="in9-btn">
+                Ver soluções
               </a>
-              <span className="in9-hero__status">
-                <span className="in9-pulse" aria-hidden="true" />
-                {content.status}
-              </span>
             </div>
           </div>
         </div>

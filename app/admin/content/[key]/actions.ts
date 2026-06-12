@@ -176,7 +176,6 @@ export async function saveContentAction(formData: FormData) {
 
     case "in9-diagnostico": {
       const featCount = getCount(formData, "features");
-      const cardCount = getCount(formData, "cards");
       value = {
         problemHeadline: String(formData.get("problemHeadline") ?? ""),
         problemLede: String(formData.get("problemLede") ?? ""),
@@ -184,10 +183,6 @@ export async function saveContentAction(formData: FormData) {
         bannerHeadline: String(formData.get("bannerHeadline") ?? ""),
         bannerDesc: String(formData.get("bannerDesc") ?? ""),
         features: Array.from({ length: featCount }, (_, i) => String(formData.get(`features__${i}__label`) ?? "")),
-        cards: Array.from({ length: cardCount }, (_, i) => {
-          const item = getItem(formData, "cards", i, ["n", "tone", "icon", "title", "desc", "result"]);
-          return { n: item.n, tone: item.tone, icon: item.icon, title: item.title, desc: item.desc, result: item.result };
-        }),
       };
       break;
     }

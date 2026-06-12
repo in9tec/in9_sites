@@ -11,9 +11,44 @@ import { Stats } from "@/components/Stats";
 import { TopBar } from "@/components/TopBar";
 import { In9Page } from "@/components/in9/In9Page";
 import { db } from "@/lib/db";
-import type { ContentMap, SectionId } from "@/lib/db/types";
+import type { ContentMap, SectionId, In9HeroContent } from "@/lib/db/types";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tenant: string }>;
+}): Promise<Metadata> {
+  const { tenant: slug } = await params;
+  const tenant = await db.getTenantBySlug(slug);
+  if (!tenant) return {};
+
+  if (tenant.layout_type === "corporate") {
+    const hero = (await db.getContent(tenant.id, "in9-hero")) as In9HeroContent | null;
+    const title = `${tenant.name} — Sites, sistemas e plataformas sob medida`;
+    const description =
+      hero?.lede ??
+      "Produtos digitais sob medida para organizar sua operação, vender mais e crescer.";
+    return {
+      title,
+      description,
+      icons: { icon: "/in9-logo.png", apple: "/in9-logo.png" },
+      openGraph: {
+        title,
+        description,
+        type: "website",
+        locale: "pt_BR",
+        siteName: tenant.name,
+        images: [{ url: "/in9-logo.png" }],
+      },
+      twitter: { card: "summary", title, description, images: ["/in9-logo.png"] },
+    };
+  }
+
+  return { title: tenant.name };
+}
 
 export default async function TenantHome({
   params,
@@ -45,7 +80,7 @@ export default async function TenantHome({
         projetos={projetos ?? []}
         testimonials={testimonials ?? []}
         ctaContent={ctaContent ?? { title: "", lede: "", vagas: "" }}
-        diagContent={diagContent ?? { problemHeadline: "", problemLede: "", solutionLede: "", bannerHeadline: "", bannerDesc: "", features: [], cards: [] }}
+        diagContent={diagContent ?? { problemHeadline: "", problemLede: "", solutionLede: "", bannerHeadline: "", bannerDesc: "", features: [] }}
         solucoes={solucoes ?? []}
         whyItems={whyItems ?? []}
         processoSteps={processoSteps ?? []}

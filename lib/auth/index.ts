@@ -11,6 +11,9 @@ import { DEV_USER_ID } from "@/lib/db/seed";
 const SESSION_COOKIE = "session_user_id";
 
 function isDevMode(): boolean {
+  // Trava de segurança: o bypass de auth NUNCA vale em produção, mesmo que a
+  // env esteja setada como "true" por engano no deploy.
+  if (process.env.NODE_ENV === "production") return false;
   return process.env.NEXT_PUBLIC_DEV_MODE === "true";
 }
 

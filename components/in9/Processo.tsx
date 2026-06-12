@@ -8,10 +8,10 @@ export function Processo({ steps }: Props) {
   return (
     <section id="processo">
       <div className="container">
-        <div style={{ textAlign: "center", maxWidth: "48ch", margin: "0 auto 72px" }}>
+        <div data-reveal style={{ textAlign: "center", maxWidth: "48ch", margin: "0 auto 72px" }}>
           <span className="in9-eyebrow" style={{ justifyContent: "center" }}>
             <span className="in9-eyebrow__bar" />
-            <span className="in9-eyebrow__num">05</span> — Processo
+            <span className="in9-eyebrow__num">03</span> — Processo
           </span>
           <h2 className="in9-h-title" style={{ fontSize: "clamp(34px, 4.2vw, 56px)" }}>
             Cinco passos.<br /> Zero <em>surpresas.</em>
@@ -20,7 +20,7 @@ export function Processo({ steps }: Props) {
 
         <div className="in9-process-rail">
           {steps.map((s, i) => (
-            <div key={i} className="in9-process-step">
+            <div key={i} className="in9-process-step" data-reveal style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}>
               <div className="in9-process-step__line" aria-hidden="true" />
               <div style={{
                 width: 14,

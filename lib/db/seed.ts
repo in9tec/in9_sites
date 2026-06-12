@@ -127,8 +127,8 @@ const IN9_SECTIONS: { id: SectionId; enabled: boolean }[] = [
   { id: "solucoes",     enabled: true  },
   { id: "processo",     enabled: true  }, // posição 03 — após Soluções
   { id: "projetos",     enabled: true  },
-  { id: "porqueinov",   enabled: false }, // oculto
-  { id: "testimonials", enabled: true  },
+  { id: "porqueinov",   enabled: true  },
+  { id: "testimonials", enabled: false }, // oculto até haver depoimentos reais
   { id: "finalcta",     enabled: true  },
 ];
 
@@ -154,15 +154,14 @@ const IN9_THEME = {
 };
 
 const IN9_HERO = {
-  note: "Estúdio brasileiro de tecnologia.\n+12 anos transformando ideia em produto.",
-  lede: "Tecnologia feita à mão para quem pensa adiante. Projetamos sites, catálogos e plataformas sob medida — combinando engenharia moderna, design centrado no humano e entrega artesanal.",
-  status: "Aceitando projetos",
+  note: "+14 anos transformando ideia em produto.",
+  lede: "Sites, sistemas e plataformas sob medida — projetados para organizar sua operação, vender mais e crescer sem refazer tudo depois.",
+  status: "Disponível para novos projetos",
 };
 
 const IN9_PROJETOS = [
-  { cat: "Catálogo / B2B",      name: "Norte Materiais",  sector: "Construção · Manaus, AM",        body: "Catálogo digital com 4.200 SKUs, busca instantânea e cotação por WhatsApp.",                           hue: 245, year: "2025" },
-  { cat: "Agendamento",          name: "Clínica Vitruvio", sector: "Saúde estética · Curitiba, PR",  body: "Plataforma de agendamento multi-profissional com confirmação automática.",                             hue: 295, year: "2025" },
-  { cat: "Site institucional",   name: "Cintia Arquitetura", sector: "Arquitetura · São Paulo, SP", body: "Portfólio editorial com gestão de cases pelo cliente e SEO orgânico.",                                 hue: 75,  year: "2024" },
+  { cat: "Loja virtual",         name: "E-commerce completo",     sector: "Catálogo · Pagamentos · Estoque", body: "Loja online ponta a ponta: catálogo, checkout com pagamento integrado e gestão de estoque em tempo real.", hue: 245, year: "2026" },
+  { cat: "Sistema interno",      name: "Painel administrativo",   sector: "Dashboard · Insights · Relatórios", body: "Central de controle do negócio: indicadores ao vivo, insights automáticos e relatórios prontos pra decisão.", hue: 210, year: "2026" },
 ];
 
 const IN9_TESTIMONIALS = [
@@ -171,15 +170,15 @@ const IN9_TESTIMONIALS = [
 ];
 
 const IN9_CTA = {
-  title: "Vamos construir sua experiência digital.",
+  title: "Seu próximo produto começa aqui.",
   lede:  "Conte sobre o seu projeto. Em até 24 horas devolvemos um diagnóstico inicial com escopo, prazo e estimativa — sem custo, sem pressão.",
   vagas: "3 vagas para Q3 / 2026",
 };
 
 const IN9_DIAGNOSTICO = {
-  problemHeadline: "O jeito antigo está custando caro para você.",
+  problemHeadline: "O jeito antigo está custando **caro** para você.",
   problemLede:     "Processos manuais, informações espalhadas e ferramentas desconectadas geram perda de tempo, erros e oportunidades perdidas.",
-  solutionLede:    "Soluções para  centralizar informações, eliminar tarefas manuais e te dar controle total do que realmente importa: seus resultados e clientes com serviço de qualidade.",
+  solutionLede:    "Centralizamos a informação, eliminamos o trabalho manual e devolvemos o controle do que importa: seus resultados e clientes bem atendidos.",
   bannerHeadline:  "Menos bagunça. Mais controle. Mais tempo. Mais resultado.",
   bannerDesc:      "In9 é o sistema que trabalha por você, enquanto você foca no que faz sua empresa crescer.",
   features: ["Menos trabalho manual", "Mais agilidade e produtividade", "Decisões com dados reais", "Mais controle, menos risco"],
@@ -193,11 +192,11 @@ const IN9_DIAGNOSTICO = {
 };
 
 const IN9_SOLUCOES = [
-  { n: "01", t: "Sites institucionais",       d: "Presenças digitais que comunicam posicionamento, com performance e SEO de fábrica.",                  tags: "Next.js, CMS, SEO" },
-  { n: "02", t: "Catálogos de produto",       d: "Vitrines navegáveis com filtros inteligentes, integração de estoque e checkout.",                     tags: "E-commerce, API, Headless" },
-  { n: "03", t: "Plataformas de agendamento", d: "Sistemas de marcação com confirmação automática, lembretes e gestão de agenda.",                      tags: "SaaS, Webhooks, WhatsApp" },
-  { n: "04", t: "Sistemas personalizados",    d: "Software interno feito sob medida para o jeito que sua operação realmente funciona.",                 tags: "Dashboards, Auth, PostgreSQL" },
-  { n: "05", t: "UX & UI Design",             d: "Design de interfaces e design systems que escalam com o produto e o time.",                           tags: "Figma, Research, Design System" },
+  { n: "01", t: "Sites institucionais",       d: "Presenças digitais que comunicam posicionamento, com performance e SEO de fábrica.",                  tags: "Alta performance, Fácil de editar, Aparece no Google" },
+  { n: "02", t: "Catálogos de produto",       d: "Vitrines navegáveis com filtros inteligentes, integração de estoque e checkout.",                     tags: "Loja online, Estoque integrado, Checkout rápido" },
+  { n: "03", t: "Plataformas de agendamento", d: "Sistemas de marcação com confirmação automática, lembretes e gestão de agenda.",                      tags: "Agenda online, Confirmação automática, WhatsApp" },
+  { n: "04", t: "Sistemas personalizados",    d: "Software interno feito sob medida para o jeito que sua operação realmente funciona.",                 tags: "Painel de controle, Login seguro, Dados em tempo real" },
+  { n: "05", t: "UX & UI Design",             d: "Design de interfaces e design systems que escalam com o produto e o time.",                           tags: "Protótipo navegável, Pesquisa com usuários, Guia de estilo" },
 ];
 
 const IN9_PORQUEINOV = [

@@ -30,7 +30,7 @@ export function FinalCTA({ content }: Props) {
             }}
           />
 
-          <div style={{ position: "relative" }}>
+          <div data-reveal style={{ position: "relative" }}>
             <span className="in9-eyebrow">
               <span className="in9-eyebrow__bar" />
               <span className="in9-eyebrow__num">07</span> — Próximo passo
@@ -63,20 +63,6 @@ export function FinalCTA({ content }: Props) {
               <a href="mailto:ola@in9.studio" className="in9-btn">
                 ola@in9.studio
               </a>
-              <span style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                color: "var(--fg-3)",
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                marginLeft: 8,
-              }}>
-                <span className="in9-pulse" aria-hidden="true" />
-                {content.vagas}
-              </span>
             </div>
           </div>
         </div>
