@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Logo } from "./Logo";
 import type { In9HeroContent } from "@/lib/db/types";
 
-const ROT_WORDS = ["intenção.", "precisão.", "estratégia.", "código."];
+const ROT_WORDS = ["intenção.", "precisão.", "estratégia.", "propósito."];
 
 function RotatingWord() {
   const [index, setIndex] = useState(0);

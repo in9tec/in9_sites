@@ -7,7 +7,7 @@ const LINKS = [
   { id: "diagnostico", label: "Diagnóstico" },
   { id: "solucoes", label: "Soluções" },
   { id: "processo", label: "Processo" },
-  { id: "por-que", label: "Manifesto" },
+  { id: "por-que", label: "Quem somos" },
 ];
 
 export function Nav() {

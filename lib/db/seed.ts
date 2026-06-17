@@ -170,8 +170,8 @@ const IN9_TESTIMONIALS = [
 ];
 
 const IN9_CTA = {
-  title: "Seu próximo produto começa aqui.",
-  lede:  "Conte sobre o seu projeto. Em até 24 horas devolvemos um diagnóstico inicial com escopo, prazo e estimativa — sem custo, sem pressão.",
+  title: "Sua ideia merece sair do papel.",
+  lede:  "Conte sobre o seu projeto. Em até 24 horas devolvemos um diagnóstico inicial.",
   vagas: "3 vagas para Q3 / 2026",
 };
 
@@ -200,11 +200,11 @@ const IN9_SOLUCOES = [
 ];
 
 const IN9_PORQUEINOV = [
-  { n: "01", t: "Abordagem personalizada",      d: "Cada projeto começa com uma imersão real no negócio. Sem templates, sem decks genéricos." },
-  { n: "02", t: "Arquitetura escalável",         d: "Stack moderna pensada para crescer com você — Next.js, TypeScript, Postgres, edge." },
-  { n: "03", t: "Tecnologias modernas",          d: "Trabalhamos com o estado da arte. React Server Components, IA aplicada, design tokens." },
-  { n: "04", t: "Pensamento estratégico",        d: "Engenharia + produto + negócio na mesma sala. Decisões com contexto, não opiniões soltas." },
-  { n: "05", t: "Entrega rápida com qualidade",  d: "Sprints curtos, releases semanais e revisão técnica em cada pull request." },
+  { n: "01", t: "Feito sob medida",              d: "Cada projeto começa com uma imersão real no seu negócio. O que entregamos resolve o seu problema — não o de outro cliente." },
+  { n: "02", t: "Investimento que não envelhece", d: "Você não vai precisar jogar fora e começar de novo em dois anos. O sistema evolui junto com a empresa." },
+  { n: "03", t: "Automatiza o que trava",        d: "Identificamos o trabalho manual que consome o seu time e transformamos em processo automático." },
+  { n: "04", t: "Decisões com dados reais",      d: "Você não vai mais depender de intuição. Cada produto entregado te dá visibilidade do que está funcionando e do que não está." },
+  { n: "05", t: "Resultado em semanas",          d: "Não prometemos projetos de um ano. Trabalhamos em ciclos curtos para você ver resultado rápido e ajustar antes de investir mais." },
 ];
 
 const IN9_PROCESSO = [
