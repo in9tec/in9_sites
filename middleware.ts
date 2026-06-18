@@ -22,7 +22,10 @@ const RESERVED = new Set([
 ]);
 
 const HOST_MAP: Record<string, string> = {
-  // "nathanvasc.com.br": "nathan",
+  "in9.studio":                "in9",
+  "www.in9.studio":            "in9",
+  "novasconcelos.com.br":      "nathan",
+  "www.novasconcelos.com.br":  "nathan",
 };
 
 export function middleware(req: NextRequest) {

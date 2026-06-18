@@ -47,7 +47,22 @@ export async function generateMetadata({
     };
   }
 
-  return { title: tenant.name };
+  const copy = (await db.getContent(tenant.id, "copy")) as { headline?: string; subheadline?: string; heroDescription?: string } | null;
+  const title = `${tenant.name} — Tecnologia além do código`;
+  const description = copy?.subheadline ?? copy?.heroDescription ?? "Experiência prática em desenvolvimento, estabilização de sistemas e gestão de equipes.";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: "pt_BR",
+      siteName: tenant.name,
+    },
+    twitter: { card: "summary", title, description },
+  };
 }
 
 export default async function TenantHome({
