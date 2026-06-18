@@ -16,13 +16,6 @@ export function TopBar({
 }) {
   const [active, setActive] = useState<SectionId>("hero");
   const [navOpen, setNavOpen] = useState(false);
-  const [time, setTime] = useState<Date | null>(null);
-
-  useEffect(() => {
-    setTime(new Date());
-    const id = setInterval(() => setTime(new Date()), 30_000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -55,10 +48,6 @@ export function TopBar({
     setNavOpen(false);
   };
 
-  const timeStr = time
-    ? time.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }) + " BRT"
-    : "—";
-
   return (
     <header className="topbar">
       <div className="topbar__inner">
@@ -83,9 +72,6 @@ export function TopBar({
             </button>
           ))}
         </nav>
-        <div className="topbar__meta">
-          <span className="meta__time tabular">{timeStr}</span>
-        </div>
         <button className={`burger ${navOpen ? "is-open" : ""}`} aria-label="Menu" onClick={() => setNavOpen((v) => !v)}>
           <span /><span /><span />
         </button>

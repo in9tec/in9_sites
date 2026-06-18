@@ -97,8 +97,19 @@ export async function saveContentAction(formData: FormData) {
     case "articles": {
       const count = getCount(formData, "items");
       value = Array.from({ length: count }, (_, i) => {
-        const item = getItem(formData, "items", i, ["n", "tag", "title", "read"]);
-        return { n: item.n, tag: item.tag, title: item.title, read: item.read };
+        const item = getItem(formData, "items", i, ["n", "tag", "title", "read", "linkedinEmbedUrl", "slug", "body"]);
+        const art: ContentMap["articles"][number] = { n: item.n, tag: item.tag, title: item.title, read: item.read };
+        // slug e body não são editados neste formulário — fazem round-trip via campos ocultos
+        if (item.slug) art.slug = item.slug;
+        if (item.body) {
+          try {
+            art.body = JSON.parse(item.body);
+          } catch {
+            // body malformado: ignora para não derrubar o save
+          }
+        }
+        if (item.linkedinEmbedUrl) art.linkedinEmbedUrl = item.linkedinEmbedUrl;
+        return art;
       });
       break;
     }

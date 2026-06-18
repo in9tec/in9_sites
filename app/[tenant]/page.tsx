@@ -30,7 +30,7 @@ export async function generateMetadata({
     const title = `${tenant.name} — Sites, sistemas e plataformas sob medida`;
     const description =
       hero?.lede ??
-      "Produtos digitais sob medida para organizar sua operação, vender mais e crescer.";
+      "Sites, sistemas e plataformas sob medida — que organizam sua operação, aumentam suas vendas e acompanham o crescimento.";
     return {
       title,
       description,
@@ -104,7 +104,9 @@ export default async function TenantHome({
   const enabled = new Set(sections.filter((s) => s.enabled).map((s) => s.section_id));
   const isOn = (id: SectionId) => enabled.has(id);
 
-  const brand = { name: tenant.name, handle: `/ ${tenant.slug}` };
+  // Wordmark exibido ao lado da logo — decoupled do slug de rota.
+  const wordmark = tenant.slug === "nathan" ? "novasconcelos" : tenant.slug;
+  const brand = { name: tenant.name, handle: `/ ${wordmark}` };
 
   // Defaults para evitar UI quebrada quando o tenant ainda não preencheu uma chave
   const _copy: ContentMap["copy"] = copy ?? { headline: "—", subheadline: "", heroDescription: "" };
@@ -127,7 +129,7 @@ export default async function TenantHome({
         {isOn("hero") && <Hero copy={_copy} />}
         {isOn("stats") && <Stats items={_stats} />}
         {isOn("sobre") && <Sobre content={_sobre} />}
-        {isOn("conteudos") && <Conteudos articles={_articles} />}
+        {isOn("conteudos") && <Conteudos articles={_articles} tenant={slug} />}
         {isOn("ferramentas") && <Ferramentas items={_tools} />}
         {isOn("consultoria") && <Consultoria services={_services} help={_help} />}
         {isOn("portfolio") && <Portfolio items={_portfolio} />}

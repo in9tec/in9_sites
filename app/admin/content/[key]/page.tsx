@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { requireTenantMember } from "@/lib/auth";
 import { DynamicList } from "@/components/admin/DynamicList";
 import { saveContentAction } from "./actions";
-import type { ContentKey } from "@/lib/db/types";
+import type { Article, ContentKey } from "@/lib/db/types";
 
 export const dynamic = "force-dynamic";
 
@@ -68,6 +68,13 @@ export default async function ContentKeyPage({
       </div>
 
       {sp.saved && <p className="admin__ok">Salvo.</p>}
+
+      <p className="admin__note">
+        Nota: as edições feitas aqui valem no ambiente local. Na produção atual (v1)
+        o armazenamento é temporário — alterações se perdem no próximo reinício do
+        servidor. Para mudanças definitivas, edite o seed em <code>lib/db/seed.ts</code>.
+        Isso deixa de valer quando o projeto migrar para o Supabase.
+      </p>
 
       <form action={saveContentAction} className="admin__form">
         <input type="hidden" name="__tenant" value={tenant.slug} />
@@ -173,7 +180,7 @@ function ContentEditor({ contentKey, value }: { contentKey: ContentKey; value: u
     }
 
     case "articles": {
-      const items = (value as { n: string; tag: string; title: string; read: string }[]) ?? [];
+      const items = (value as Article[]) ?? [];
       return (
         <DynamicList
           prefix="items"
@@ -182,8 +189,19 @@ function ContentEditor({ contentKey, value }: { contentKey: ContentKey; value: u
             { name: "tag", label: "Tag" },
             { name: "title", label: "Título", wide: true },
             { name: "read", label: "Tempo de leitura" },
+            { name: "linkedinEmbedUrl", label: "URL do embed do LinkedIn (opcional)", wide: true },
+            { name: "slug", label: "", type: "hidden" },
+            { name: "body", label: "", type: "hidden" },
           ]}
-          initialItems={items}
+          initialItems={items.map((a) => ({
+            n: a.n,
+            tag: a.tag,
+            title: a.title,
+            read: a.read,
+            linkedinEmbedUrl: a.linkedinEmbedUrl ?? "",
+            slug: a.slug ?? "",
+            body: a.body ? JSON.stringify(a.body) : "",
+          }))}
         />
       );
     }

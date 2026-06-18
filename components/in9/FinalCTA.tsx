@@ -57,11 +57,11 @@ export function FinalCTA({ content }: Props) {
               {content.lede}
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
-              <a href="mailto:ola@in9.studio" className="in9-btn in9-btn--primary">
+              <a href="mailto:contatoin9tec@gmail.com" className="in9-btn in9-btn--primary">
                 Agendar conversa <span className="in9-btn__arrow">→</span>
               </a>
-              <a href="mailto:ola@in9.studio" className="in9-btn">
-                ola@in9.studio
+              <a href="mailto:contatoin9tec@gmail.com" className="in9-btn">
+                contatoin9tec@gmail.com
               </a>
             </div>
           </div>

@@ -19,9 +19,6 @@ export function Hero({ copy }: { copy: CopyContent }) {
             <a className="btn btn--primary" href="#conteudos">
               <span>Ver conteúdos</span><Arrow />
             </a>
-            <a className="btn btn--ghost" href="#contato">
-              <span>Falar comigo</span><Arrow />
-            </a>
           </div>
         </div>
 

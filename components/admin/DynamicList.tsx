@@ -5,7 +5,7 @@ import { useState } from "react";
 export interface FieldDef {
   name: string;
   label: string;
-  type?: "text" | "number" | "checkbox" | "textarea";
+  type?: "text" | "number" | "checkbox" | "textarea" | "hidden";
   wide?: boolean;
 }
 
@@ -41,6 +41,14 @@ export function DynamicList({ prefix, fields, initialItems }: Props) {
         <div key={idx} className="dynlist__item">
           <div className="dynlist__fields">
             {fields.map((f) => (
+              f.type === "hidden" ? (
+                <input
+                  key={f.name}
+                  type="hidden"
+                  name={`${prefix}__${idx}__${f.name}`}
+                  value={String(item[f.name] ?? "")}
+                />
+              ) : (
               <label
                 key={f.name}
                 className="admin__field"
@@ -70,6 +78,7 @@ export function DynamicList({ prefix, fields, initialItems }: Props) {
                   />
                 )}
               </label>
+              )
             ))}
           </div>
           <button

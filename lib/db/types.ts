@@ -114,11 +114,19 @@ export interface Stat {
   l: string;
 }
 
+export interface ArticleSection {
+  heading?: string;
+  paragraphs: string[];
+}
+
 export interface Article {
   n: string;
   tag: string;
   title: string;
   read: string;
+  slug?: string;
+  body?: ArticleSection[];
+  linkedinEmbedUrl?: string; // URL do embed oficial: https://www.linkedin.com/embed/feed/update/urn:li:share:...
 }
 
 export interface Tool {

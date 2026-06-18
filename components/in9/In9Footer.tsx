@@ -30,7 +30,7 @@ export function In9Footer() {
             <ul>
               <li><a href="#projetos">Projetos</a></li>
               <li><a href="#processo">Processo</a></li>
-              <li><a href="#por-que">Manifesto</a></li>
+              <li><a href="#por-que">Porque a In9</a></li>
               <li><a href="#contato">Contato</a></li>
             </ul>
           </div>
@@ -38,17 +38,13 @@ export function In9Footer() {
           <div className="in9-footer__col">
             <h4>Contato</h4>
             <ul>
-              <li><a href="mailto:ola@in9.studio">ola@in9.studio</a></li>
+              <li><a href="mailto:contatoin9tec@gmail.com">contatoin9tec@gmail.com</a></li>
             </ul>
           </div>
         </div>
 
         <div className="in9-footer__bottom">
           <span>© 2026 In9 Studio</span>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <span className="in9-pulse" aria-hidden="true" />
-            Operando · São Paulo / Remoto
-          </span>
         </div>
       </div>
     </footer>

@@ -29,20 +29,74 @@ const IN9_ID    = "00000000-0000-0000-0000-00000000000b";
 
 const COPY: ContentMap["copy"] = {
   headline: "Tecnologia além\ndo código",
-  subheadline: "O que realmente faz diferença na sua carreira, nas equipes e em sistemas reais.",
+  subheadline: "O que realmente faz diferença na sua carreira, nas equipes e quando o erro custa caro.",
   heroDescription:
     "Experiência prática em todo fluxo de desenvolvimento, implantação, estabilização de sistemas, planejamento e gestão de equipes.",
 };
 
 const STATS: Stat[] = [
-  { n: "10+", l: "Anos em tecnologia" },
+  { n: "14+", l: "Anos em tecnologia" },
   { n: "40+", l: "Sistemas em produção" },
-  { n: "15", l: "Times acompanhados" },
-  { n: "∞", l: "Deploys quebrados resolvidos" },
+  { n: "+15", l: "Times acompanhados" },
+  { n: "∞", l: "Problemas resolvidos antes de virar crise" },
 ];
 
 const ARTICLES: Article[] = [
-  { n: "01", tag: "Carreira", title: "O que eu gostaria que tivessem me dito antes da faculdade", read: "8 min" },
+  {
+    n: "01", tag: "Carreira", title: "O que eu gostaria que tivessem me dito antes da faculdade", read: "8 min",
+    slug: "o-que-eu-gostaria-que-tivessem-me-dito-antes-da-faculdade",
+    // Para habilitar a discussão via LinkedIn: publique este artigo como post,
+    // clique em "Inserir" no post e cole abaixo só a URL do src do iframe.
+    // Para habilitar a discussão via LinkedIn: publique este artigo como post,
+    // clique em "Inserir" no post e cole abaixo só a URL do src do iframe.
+    // linkedinEmbedUrl: "https://www.linkedin.com/embed/feed/update/urn:li:share:XXXXXXXXXXXX",
+    body: [
+      {
+        paragraphs: [
+          "Com uma certa frequência alguém me manda mensagem pedindo dica. Estudante de tecnologia, aluno do ensino médio, geralmente no início da jornada. A primeira pergunta quase sempre é a mesma: quanto dá pra ganhar?",
+          "É uma pergunta legítima. Mas quase ninguém pergunta se vai gostar do que vai fazer.",
+          "Acompanhei muita gente tomando decisão de carreira baseada em salário e perspectiva de mercado. Alguns deram certo. Muitos não. E os que não deram certo repetiram quase sempre o mesmo padrão: anos investidos em algo que não gostavam, seguidos de uma mudança de rota que custou tempo e energia que não voltam.",
+          "Existe o que eu gostaria que alguém tivesse me dito antes de entrar. Não como fórmula, mas como referência.",
+        ],
+      },
+      {
+        heading: "Escolha pelo que você consegue se ver fazendo, não pelo quanto vão te pagar",
+        paragraphs: [
+          "Vi amigos seguirem engenharia, direito, medicina, cursos disputados, bem vistos, com mercado sólido. Alguns eram tecnicamente capazes. E mesmo assim, no meio do caminho ou logo depois de formados, mudaram tudo.",
+          "Não porque eram ruins. Porque não gostavam.",
+          "Isso pesa de um jeito que nenhum salário compensa. Você pode acostumar com o dinheiro. Você não acostuma com fazer algo que não faz sentido pra você. Aparece na qualidade do trabalho, na disposição de enfrentar os problemas difíceis. Aparece no domingo à noite, quando você pensa na semana que vem.",
+          "Não estou dizendo pra ignorar o mercado. Estou dizendo que existe uma diferença enorme entre tolerar uma profissão e conseguir se ver nela de verdade. E essa diferença muda tudo no longo prazo.",
+          "Antes de olhar tabela salarial e tendências, pergunta: qual tipo de problema você aguenta resolver todos os dias? O restante é consequência.",
+        ],
+      },
+      {
+        heading: "Dentro do curso, a indecisão é normal",
+        paragraphs: [
+          "Tecnologia tem mais ramificações do que parece de fora. Desenvolvimento, requisitos, qualidade, testes, pesquisa, gestão, arquitetura, dados, segurança. Dentro de cada uma, mais subdivisões. Medicina tem dezenas de especialidades. Direito tem ramos que parecem áreas completamente separadas.",
+          "É muita coisa pra decidir logo no início.",
+          "Fiquei um bom tempo sem saber onde queria focar. Isso me consumia. Sentia que estava atrasado, que precisava definir logo, que todo mundo ao meu redor sabia o que queria menos eu.",
+          "Não sabia. E foi tudo bem.",
+          "O que foi clareando as coisas foi a exposição: projetos diferentes, conversas com profissionais em funções que eu nem sabia que existiam, estágios que confirmaram o que eu queria, e outros que confirmaram o que eu não queria, o que é igualmente valioso.",
+          "Não existe forma de descobrir o que você gosta sem experimentar. E a faculdade é um dos momentos mais seguros pra isso. Você erra sem perder emprego. Muda de direção sem custo alto.",
+          "Se você está no meio do curso sem saber exatamente onde quer chegar, você não está atrasado. Você está no processo.",
+        ],
+      },
+      {
+        heading: "Se vai fazer, faz direito",
+        paragraphs: [
+          "Qualquer tarefa que você pegar, um trabalho pequeno, uma apresentação, um projeto que parece irrelevante, tenta entregar o melhor que você consegue naquele momento. Revisa. Pesquisa além do mínimo. Pede ajuda quando trava em vez de deixar pela metade.",
+          "Parece óbvio. Mas a maioria não faz. E é exatamente por isso que quem faz se destaca.",
+          "Não é sobre perfecionismo. É sobre uma postura consistente: quando você se compromete com algo, entrega da melhor forma possível. Esse hábito construído na faculdade é o mesmo que vai te diferenciar no mercado. E começa antes, em como você faz o que ninguém está olhando.",
+        ],
+      },
+      {
+        paragraphs: [
+          "A faculdade vai te dar base. Vai te apresentar a conceitos que vão importar e a outros que nunca vão aparecer de novo. Vai te dar tempo, e tempo é o recurso mais escasso que você vai ter depois de formado.",
+          "Usa bem. Escolhe com cuidado. Experimenta sem medo. Entrega com consistência.",
+        ],
+      },
+    ],
+  },
   { n: "02", tag: "Carreira", title: "Ser bom tecnicamente não garante crescimento", read: "6 min" },
   { n: "03", tag: "Soft skills", title: "O profissional que resolve problemas sempre se destaca", read: "5 min" },
   { n: "04", tag: "Processos", title: "Onde processos falham no desenvolvimento de sistemas", read: "9 min" },
@@ -106,7 +160,6 @@ const SOBRE: ContentMap["sobre"] = {
     { dt: "Atuação", dd: "Desenvolvimento, arquitetura, liderança técnica" },
     { dt: "Foco", dd: "Processos, estabilização, decisão técnica" },
     { dt: "Escrita", dd: "Carreira, soft skills, operação" },
-    { dt: "Base", dd: "Brasil" },
   ],
 };
 
@@ -155,7 +208,7 @@ const IN9_THEME = {
 
 const IN9_HERO = {
   note: "+14 anos transformando ideia em produto.",
-  lede: "Sites, sistemas e plataformas sob medida — projetados para organizar sua operação, vender mais e crescer sem refazer tudo depois.",
+  lede: "Sites, sistemas e plataformas sob medida — que organizam sua operação, aumentam suas vendas e acompanham o crescimento.",
   status: "Disponível para novos projetos",
 };
 
@@ -239,12 +292,16 @@ export function seed() {
 
   const invites: TenantInvite[] = [];
 
+  // v1 de lançamento: foco em hero, stats, sobre e conteúdos.
+  // As demais seções ficam ocultas até haver conteúdo/oferta definidos.
+  const NATHAN_HIDDEN = new Set<SectionId>(["ferramentas", "consultoria", "portfolio", "contato"]);
+
   const sections: TenantSection[] = [
     // Nathan
     ...DEFAULT_SECTION_ORDER.map((id, i) => ({
       tenant_id: NATHAN_ID,
       section_id: id,
-      enabled: true,
+      enabled: !NATHAN_HIDDEN.has(id),
       position: i,
     })),
     // In9
