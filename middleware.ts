@@ -22,8 +22,8 @@ const RESERVED = new Set([
 ]);
 
 const HOST_MAP: Record<string, string> = {
-  "in9.studio":                "in9",
-  "www.in9.studio":            "in9",
+  "in9tec.com.br":             "in9",
+  "www.in9tec.com.br":         "in9",
   "novasconcelos.com.br":      "nathan",
   "www.novasconcelos.com.br":  "nathan",
 };
