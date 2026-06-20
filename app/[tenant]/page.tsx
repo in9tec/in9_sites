@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import { Conteudos } from "@/components/Conteudos";
 import { Consultoria } from "@/components/Consultoria";
 import { Contato } from "@/components/Contato";
@@ -25,6 +26,13 @@ export async function generateMetadata({
   const tenant = await db.getTenantBySlug(slug);
   if (!tenant) return {};
 
+  // Deploy único serve dois domínios — deriva o base do host da request para
+  // que og:image/icons fiquem absolutos no domínio certo (WhatsApp/crawlers
+  // não resolvem URLs relativas).
+  const host = (await headers()).get("host") ?? "in9tec.com.br";
+  const proto = host.startsWith("localhost") || host.startsWith("127.") ? "http" : "https";
+  const metadataBase = new URL(`${proto}://${host}`);
+
   if (tenant.layout_type === "corporate") {
     const hero = (await db.getContent(tenant.id, "in9-hero")) as In9HeroContent | null;
     const title = `${tenant.name} — Sites, sistemas e plataformas sob medida`;
@@ -32,6 +40,7 @@ export async function generateMetadata({
       hero?.lede ??
       "Sites, sistemas e plataformas sob medida — que organizam sua operação, aumentam suas vendas e acompanham o crescimento.";
     return {
+      metadataBase,
       title,
       description,
       icons: { icon: "/in9-logo.png", apple: "/in9-logo.png" },
@@ -52,16 +61,19 @@ export async function generateMetadata({
   const description = copy?.subheadline ?? copy?.heroDescription ?? "Experiência prática em desenvolvimento, estabilização de sistemas e gestão de equipes.";
 
   return {
+    metadataBase,
     title,
     description,
+    icons: { icon: "/nathan-logo.png", apple: "/nathan-logo.png" },
     openGraph: {
       title,
       description,
       type: "website",
       locale: "pt_BR",
       siteName: tenant.name,
+      images: [{ url: "/nathan-logo.png" }],
     },
-    twitter: { card: "summary", title, description },
+    twitter: { card: "summary", title, description, images: ["/nathan-logo.png"] },
   };
 }
 
