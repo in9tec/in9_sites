@@ -38,6 +38,12 @@ export function middleware(req: NextRequest) {
   // 1) Host custom — reescreve para /[slug]/...
   if (host && HOST_MAP[host]) {
     const slug = HOST_MAP[host];
+    const firstSeg = pathname.split("/").filter(Boolean)[0];
+    // Rotas reservadas (admin/auth/api/...) resolvem na raiz, sem prefixo de
+    // tenant — senão /admin viraria /[slug]/admin e daria 404.
+    if (firstSeg && RESERVED.has(firstSeg)) {
+      return NextResponse.next();
+    }
     requestHeaders.set("x-tenant-slug", slug);
     const rewritten = url.clone();
     rewritten.pathname = pathname === "/" ? `/${slug}` : `/${slug}${pathname}`;

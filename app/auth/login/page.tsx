@@ -10,7 +10,25 @@ async function devLoginAction() {
   redirect("/admin");
 }
 
-export default function LoginPage() {
+async function passwordLoginAction(formData: FormData) {
+  "use server";
+  const password = String(formData.get("password") ?? "");
+  const expected = process.env.ADMIN_PASSWORD;
+  // Sem env configurada ou senha errada → volta com erro (nega o acesso).
+  if (!expected || password !== expected) {
+    redirect("/auth/login?error=1");
+  }
+  // Autentica como o super-admin do seed (owner dos dois tenants).
+  await signInAs(DEV_USER_ID);
+  redirect("/admin");
+}
+
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
   return (
     <main className="auth">
       <div className="auth__box">
@@ -27,13 +45,15 @@ export default function LoginPage() {
           </>
         ) : (
           <>
-            <p className="muted">Login por email e senha (Supabase) — em construção.</p>
-            <form className="admin__form" action="#">
-              <label className="admin__field"><span>Email</span><input name="email" type="email" disabled /></label>
-              <label className="admin__field"><span>Senha</span><input name="password" type="password" disabled /></label>
-              <button className="btn btn--primary" type="submit" disabled>Entrar</button>
+            <p className="muted">Acesso ao painel de administração.</p>
+            {error && <p className="admin__error">Senha incorreta.</p>}
+            <form className="admin__form" action={passwordLoginAction}>
+              <label className="admin__field">
+                <span>Senha</span>
+                <input name="password" type="password" autoComplete="current-password" required autoFocus />
+              </label>
+              <button className="btn btn--primary" type="submit">Entrar</button>
             </form>
-            <p className="muted tabular">— Disponível na Fase 2 quando o Supabase entrar.</p>
           </>
         )}
       </div>
